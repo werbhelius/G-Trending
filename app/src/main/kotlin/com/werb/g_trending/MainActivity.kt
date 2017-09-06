@@ -3,6 +3,7 @@ package com.werb.g_trending
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import com.werb.g_trending.api.TrendingRequest
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +15,9 @@ class MainActivity : AppCompatActivity() {
         initToolbar()
         initTabLayout()
 
+        Thread{
+            TrendingRequest.loadData(null)
+        }.start()
     }
 
     private fun initToolbar() {
