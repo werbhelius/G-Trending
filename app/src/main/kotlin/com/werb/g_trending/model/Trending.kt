@@ -2,5 +2,12 @@ package com.werb.g_trending.model
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/6. */
 
-class Trending {
-}
+data class Trending(val title: String?,
+                    val description: String,
+                    val stars: String?,
+                    val forks: String?,
+                    val color: String,
+                    val todayStars: String?,
+                    val language: String?,
+                    val contributors: String,
+                    val users: List<User>)
