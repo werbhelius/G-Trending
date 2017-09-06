@@ -16,9 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/toolbar_theme"
-            app:layout_scrollFlags="scroll|enterAlways" />
+            app:theme="@style/toolbar_theme" />
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
@@ -36,10 +36,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
+                app:tabTextAppearance="@style/TabLayoutTextStyle"
                 app:elevation="20dp"
-                app:tabIndicatorColor="@color/colorWhite"
-                app:tabSelectedTextColor="@color/colorLight"
-                app:tabTextColor="@color/colorLight" />
+                app:tabIndicatorColor="@color/colorBlack"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/colorBlack"
+                app:tabTextColor="@color/colorBlack" />
 
         </android.support.design.widget.AppBarLayout>
 

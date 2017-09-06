@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="trending">
+        <item>All Language</item>
+        <item>JavaScript</item>
+        <item>Java</item>
+        <item>Kotlin</item>
+        <item>Swift</item>
+        <item>Vue</item>
+        <item>Go</item>
+        <item>Python</item>
+        <item>C</item>
+        <item>Html</item>
+    </string-array>
+</resources>
