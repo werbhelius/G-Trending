@@ -22,3 +22,8 @@ local.properties
 
 .classpath
 .project
+
+*.iws
+*.apk
+*.ap_
+*.class
