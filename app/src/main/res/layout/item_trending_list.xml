@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/paddingLarge"
+    android:layout_marginRight="@dimen/paddingLarge"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/paddingLarge">
+    android:paddingLeft="@dimen/paddingLarge"
+    app:elevation="10dp">
 
     <TextView
         android:id="@+id/header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextStyle.Black"
         android:layout_marginTop="@dimen/paddingLarge"
         android:ellipsize="end"
         android:lines="1" />
 
     <TextView
         android:id="@+id/desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextStyle.Gray"
         android:layout_below="@id/header"
         android:layout_marginTop="@dimen/paddingLarge"
         android:ellipsize="end"
@@ -31,25 +34,28 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TextStyle.Gray"
             android:text="Build by " />
 
-        <LinearLayout
+        <com.werb.g_trending.view.UserIconsView
             android:id="@+id/userIconList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <!--预留自定义View-->
-        </LinearLayout>
+        </com.werb.g_trending.view.UserIconsView>
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/languageType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextStyle.Gray"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:background="@drawable/triangle_bg"
+        android:padding="@dimen/paddingLarge"
+        android:rotation="45"
+        android:text="Java"
+        android:textColor="@color/colorWhite" />
 
 </RelativeLayout>

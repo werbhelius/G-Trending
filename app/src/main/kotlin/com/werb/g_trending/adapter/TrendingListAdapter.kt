@@ -4,17 +4,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.werb.g_trending.R
 import com.werb.g_trending.bean.TrendingInfo
+import com.werb.g_trending.view.UserIconsView
 
 /**
  * Created by liuxi on 2017/9/6.
  */
 class TrendingListAdapter(private var data: List<TrendingInfo>) : RecyclerView.Adapter<TrendingListAdapter.ViewHolder>() {
     override fun getItemCount(): Int {
-        return data!!.size
+//        return data!!.size
+        return 20
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
@@ -23,6 +24,7 @@ class TrendingListAdapter(private var data: List<TrendingInfo>) : RecyclerView.A
         holder!!.headerInfo!!.text = info.owner + "/" + info.repository
         holder!!.desc!!.text = info.desc
         holder.languageLogo!!.text = info.languageType
+        holder.userIconList!!.setData(info.iconUrlList)
 
     }
 
@@ -35,7 +37,7 @@ class TrendingListAdapter(private var data: List<TrendingInfo>) : RecyclerView.A
         var headerInfo: TextView? = null
         var desc: TextView? = null
         var languageLogo: TextView? = null
-        var userIconList: LinearLayout? = null
+        var userIconList: UserIconsView? = null
 
         init {
             headerInfo = itemView!!.findViewById(R.id.header)

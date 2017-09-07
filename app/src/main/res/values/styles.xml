@@ -17,4 +17,17 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="TextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextStyle.Black">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="TextStyle.Gray">
+        <item name="android:textColor">@color/colorGray</item>
+    </style>
+
 </resources>
