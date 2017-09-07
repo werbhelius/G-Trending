@@ -1,6 +1,7 @@
 package com.werb.g_trending.api
 
 import com.werb.g_trending.model.Repository
+import com.werb.g_trending.model.Developer
 import com.werb.g_trending.model.User
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
@@ -26,9 +27,13 @@ object TrendingRequest {
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
-//    fun developer(lang: String?, daily: DailyType = DailyType.TODAY): Observable<User> {
-//        val url = buildUrl("$baseUrl/developer", lang, daily)
-//    }
+    fun developer(lang: String?, daily: DailyType = DailyType.TODAY): Observable<List<Developer>> {
+        val url = buildUrl("$baseUrl/developer", lang, daily)
+        return Observable.create(ObservableOnSubscribe<List<Developer>> {
+            it.onNext(requestUsers(url))
+            it.onComplete()
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
 
     private fun buildUrl(url: String , lang: String?, daily: DailyType): String {
         return  when (daily) {
@@ -40,9 +45,9 @@ object TrendingRequest {
 
 
     private fun requestRepos(url: String): List<Repository> {
+        val trendingList = mutableListOf<Repository>()
         val document: Document = Jsoup.connect(url).get()
         val repoList = document.select(".repo-list")
-        val trendingList = mutableListOf<Repository>()
         if (repoList.isNotEmpty()) {
             val list: Elements? = repoList.select("li")
             list?.let {
@@ -80,6 +85,29 @@ object TrendingRequest {
             }
         }
         return trendingList
+    }
+
+    private fun requestUsers(url: String): List<Developer> {
+        val userList = mutableListOf<Developer>()
+        val document: Document = Jsoup.connect(url).get()
+        val list = document.select("div.explore-content ol")
+        if (list.isNotEmpty()) {
+            val li: Elements? = list.select("li")
+            li?.let {
+                if (li.isNotEmpty()) {
+                    it.onEach {
+                        val avatar = it.select(".d-flex div.mx-2 a:eq(0) img.rounded-1").attr("src")
+                        val name = it.select(".d-flex div.mx-2 h2 a").text()
+                        val repositoryUrl = it.select(".d-flex div.mx-2 a:eq(1)").attr("href")
+                        val repositoryName = it.select(".d-flex div.mx-2 a:eq(1) span.repo-snipit-name span.repo").text()
+                        val repositoryDesc = it.select(".d-flex div.mx-2 a:eq(1) span.repo-snipit-description ").text()
+                        val user = Developer(name, avatar, repositoryUrl, repositoryName, repositoryDesc)
+                        userList.add(user)
+                    }
+                }
+            }
+        }
+        return userList
     }
 
 }

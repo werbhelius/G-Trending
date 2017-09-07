@@ -11,3 +11,5 @@ data class Repository(val title: String?,
                       val language: String?,
                       val contributors: String,
                       val users: List<User>)
+
+data class User(val name: String, val avatar: String)

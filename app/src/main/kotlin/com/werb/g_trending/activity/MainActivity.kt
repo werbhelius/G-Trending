@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         initToolbar()
         initTabLayout()
 
-        TrendingRequest.repository("").subscribe {
+        TrendingRequest.developer("").subscribe {
             println(it.size)
         }
     }
