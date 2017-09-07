@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity() {
         initToolbar()
         initTabLayout()
 
-        Thread{
-            TrendingRequest.loadData(null)
-        }.start()
+        TrendingRequest.repository("").subscribe {
+            println(it.size)
+        }
     }
 
     private fun initToolbar() {

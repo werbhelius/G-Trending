@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_trending.*
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/6. */
 
-class TrendingFragment() : Fragment() {
+class TrendingFragment : Fragment() {
 
     private var data: MutableList<TrendingInfo> = ArrayList()
     private var adapter: TrendingListAdapter = TrendingListAdapter(data)

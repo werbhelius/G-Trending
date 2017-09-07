@@ -24,6 +24,3 @@ local.properties
 .project
 
 *.iws
-*.apk
-*.ap_
-*.class

@@ -1,30 +1,48 @@
 package com.werb.g_trending.api
 
-import com.werb.g_trending.model.Trending
+import com.werb.g_trending.model.Repository
 import com.werb.g_trending.model.User
+import io.reactivex.Observable
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.jsoup.nodes.Node
 import org.jsoup.select.Elements
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/6. */
 
 object TrendingRequest {
 
+    enum class DailyType { TODAY, WEEK, MONTH }
+
     private val baseUrl = "https://github.com/trending"
 
-    fun loadData(lang: String?){
-        lang?.let {
-            val url = "$baseUrl/$lang"
-            request(url)
-        } ?: request(baseUrl)
+    fun repository(lang: String?, daily: DailyType = DailyType.TODAY): Observable<List<Repository>> {
+        val url = buildUrl(baseUrl, lang, daily)
+        return Observable.create(ObservableOnSubscribe<List<Repository>> {
+            it.onNext(requestRepos(url))
+            it.onComplete()
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
 
+//    fun developer(lang: String?, daily: DailyType = DailyType.TODAY): Observable<User> {
+//        val url = buildUrl("$baseUrl/developer", lang, daily)
+//    }
+
+    private fun buildUrl(url: String , lang: String?, daily: DailyType): String {
+        return  when (daily) {
+            DailyType.TODAY -> "$url/$lang?since=daily"
+            DailyType.WEEK -> "$url/$lang?since=weekly"
+            DailyType.MONTH -> "$url/$lang?since=monthly"
+        }
     }
 
 
-    private fun request(url: String){
+    private fun requestRepos(url: String): List<Repository> {
         val document: Document = Jsoup.connect(url).get()
         val repoList = document.select(".repo-list")
+        val trendingList = mutableListOf<Repository>()
         if (repoList.isNotEmpty()) {
             val list: Elements? = repoList.select("li")
             list?.let {
@@ -47,7 +65,7 @@ object TrendingRequest {
                         val aTag = it.select(".f6 span a.no-underline")
                         val contributors = aTag.attr("href")
                         val users = arrayListOf<User>()
-                        if (aTag.isNotEmpty()){
+                        if (aTag.isNotEmpty()) {
                             val images = aTag.select("img")
                             images.onEach {
                                 val name = it.attr("title")
@@ -55,11 +73,13 @@ object TrendingRequest {
                                 User(name, avatar)
                             }
                         }
-                        Trending(title, description, stars, forks, color, todayStars, language, contributors, users)
+                        val trending = Repository(title, description, stars, forks, color, todayStars, language, contributors, users)
+                        trendingList.add(trending)
                     }
                 }
             }
         }
+        return trendingList
     }
 
 }
