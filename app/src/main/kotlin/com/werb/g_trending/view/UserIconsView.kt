@@ -1,6 +1,7 @@
 package com.werb.g_trending.view
 
 import android.content.Context
+import android.util.AttributeSet
 import android.widget.LinearLayout
 import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.g_trending.utils.ResourcesUtils
@@ -10,7 +11,13 @@ import com.werb.g_trending.utils.ResourcesUtils
  * 用户图标列表
  * Created by liuxi on 2017/9/7.
  */
-class UserIconsView(context: Context?) : LinearLayout(context) {
+class UserIconsView : LinearLayout {
+
+    constructor(context: Context?) : super(context)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+
     init {
         orientation = LinearLayout.HORIZONTAL
     }

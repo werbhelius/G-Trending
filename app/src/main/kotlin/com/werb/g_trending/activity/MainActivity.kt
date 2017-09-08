@@ -3,6 +3,7 @@ package com.werb.g_trending.activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.Toolbar
 import com.werb.g_trending.R
 import com.werb.g_trending.adapter.TabLayoutAdapter
 import com.werb.g_trending.fragment.TrendingFragment
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private fun initToolbar() {
         toolbar.title = getString(R.string.app_name)
         toolbar.inflateMenu(R.menu.toolbar)
+        toolbar.setOnMenuItemClickListener(menuClickListener)
     }
 
     private fun initTabLayout() {
@@ -37,5 +39,12 @@ class MainActivity : AppCompatActivity() {
         content_viewPager.offscreenPageLimit = 5
         content_viewPager.adapter = TabLayoutAdapter(supportFragmentManager, fragments, resources.getStringArray(R.array.trending))
         tabLayout.setupWithViewPager(content_viewPager)
+    }
+
+    private val menuClickListener = Toolbar.OnMenuItemClickListener {
+        when (it.itemId){
+            R.id.action_theme -> ThemeActivity.startActivity(this@MainActivity)
+        }
+        return@OnMenuItemClickListener true
     }
 }

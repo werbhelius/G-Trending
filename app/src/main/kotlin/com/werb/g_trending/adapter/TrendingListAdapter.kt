@@ -20,11 +20,13 @@ class TrendingListAdapter(private var data: List<TrendingInfo>) : RecyclerView.A
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
 
-        var info: TrendingInfo = data.get(position)
-        holder!!.headerInfo!!.text = info.owner + "/" + info.repository
-        holder!!.desc!!.text = info.desc
-        holder.languageLogo!!.text = info.languageType
-        holder.userIconList!!.setData(info.iconUrlList)
+        if (data.isNotEmpty()) {
+            var info: TrendingInfo = data.get(position)
+            holder!!.headerInfo!!.text = info.owner + "/" + info.repository
+            holder!!.desc!!.text = info.desc
+            holder.languageLogo!!.text = info.languageType
+            holder.userIconList!!.setData(info.iconUrlList)
+        }
 
     }
 
