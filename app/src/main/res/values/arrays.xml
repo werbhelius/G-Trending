@@ -12,4 +12,31 @@
         <item>C</item>
         <item>Html</item>
     </string-array>
+
+    <string-array name="theme">
+        <item>@string/theme_default</item>
+        <item>@string/theme_blue</item>
+        <item>@string/theme_indigo</item>
+        <item>@string/theme_green</item>
+        <item>@string/theme_red</item>
+        <item>@string/theme_blue_grey</item>
+        <item>@string/theme_black</item>
+        <item>@string/theme_purple</item>
+        <item>@string/theme_orange</item>
+        <item>@string/theme_pink</item>
+    </string-array>
+
+    <integer-array name="theme_color">
+        <item>@color/colorPrimary</item>
+        <item>@color/blue_primary</item>
+        <item>@color/indigo_primary</item>
+        <item>@color/green_primary</item>
+        <item>@color/red_primary</item>
+        <item>@color/blue_grey_primary</item>
+        <item>@color/black_primary</item>
+        <item>@color/purple_primary</item>
+        <item>@color/orange_primary</item>
+        <item>@color/pink_primary</item>
+    </integer-array>
+
 </resources>

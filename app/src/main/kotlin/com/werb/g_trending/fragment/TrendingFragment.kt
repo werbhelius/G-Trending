@@ -1,5 +1,6 @@
 package com.werb.g_trending.fragment
 
+import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -28,7 +29,7 @@ class TrendingFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.addItemDecoration(ItemDecoration())
+        recyclerView.addItemDecoration(ItemDecoration(context))
         recyclerView.adapter = adapter
     }
 
@@ -36,10 +37,10 @@ class TrendingFragment : Fragment() {
         fun newInstance(): TrendingFragment = TrendingFragment()
     }
 
-    class ItemDecoration : RecyclerView.ItemDecoration() {
+    class ItemDecoration(private val context: Context) : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
             super.getItemOffsets(outRect, view, parent, state)
-            outRect!!.top = ResourcesUtils.dp2px(TrendingFragment.newInstance().context, 10f)
+            outRect!!.top = ResourcesUtils.dp2px(context, 10f)
         }
     }
 
