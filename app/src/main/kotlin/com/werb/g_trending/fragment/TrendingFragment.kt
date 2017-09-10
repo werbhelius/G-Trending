@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.werb.g_trending.R
 import com.werb.g_trending.adapter.TrendingListAdapter
-import com.werb.g_trending.bean.TrendingInfo
+import com.werb.g_trending.model.Repository
 import com.werb.g_trending.utils.ResourcesUtils
 import kotlinx.android.synthetic.main.fragment_trending.*
 
@@ -19,8 +19,8 @@ import kotlinx.android.synthetic.main.fragment_trending.*
 
 class TrendingFragment : Fragment() {
 
-    private var data: MutableList<TrendingInfo> = ArrayList()
-    private var adapter: TrendingListAdapter = TrendingListAdapter(data)
+    private var data: MutableList<Repository> = ArrayList()
+    private var adapter: TrendingListAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_trending, null)
@@ -30,6 +30,7 @@ class TrendingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.addItemDecoration(ItemDecoration(context))
+        adapter = TrendingListAdapter(context, data)
         recyclerView.adapter = adapter
     }
 
@@ -40,7 +41,7 @@ class TrendingFragment : Fragment() {
     class ItemDecoration(private val context: Context) : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
             super.getItemOffsets(outRect, view, parent, state)
-            outRect!!.top = ResourcesUtils.dp2px(context, 10f)
+            outRect!!.top = ResourcesUtils.dp2px(context, 8f)
         }
     }
 

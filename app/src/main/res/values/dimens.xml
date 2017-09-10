@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="paddingLarge">14dp</dimen>
-    <dimen name="paddingNormal">8dp</dimen>
+    <dimen name="paddingSmall">3dp</dimen>
+    <dimen name="paddingNormal">5dp</dimen>
+    <dimen name="paddingXNormal">8dp</dimen>
+    <dimen name="paddingLarge">12dp</dimen>
+    <dimen name="paddingXLarge">15dp</dimen>
+    <dimen name="paddingXXLarge">15dp</dimen>
+
 
 </resources>

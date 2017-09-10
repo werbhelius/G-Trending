@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="156dp"
-        android:background="?attr/colorPrimary"/>
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="156dp"-->
+        <!--android:background="?attr/colorPrimary"/>-->
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TabLayout.Theme"
-                app:elevation="20dp"
+                app:elevation="0dp"
                 app:tabMode="scrollable" />
 
         </android.support.design.widget.AppBarLayout>

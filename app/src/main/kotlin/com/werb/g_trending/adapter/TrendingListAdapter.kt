@@ -1,32 +1,48 @@
 package com.werb.g_trending.adapter
 
+import android.content.Context
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.werb.g_trending.R
-import com.werb.g_trending.bean.TrendingInfo
-import com.werb.g_trending.view.UserIconsView
+import com.werb.g_trending.model.Repository
+import com.werb.g_trending.view.AvatarsView
+import java.util.ArrayList
 
 /**
  * Created by liuxi on 2017/9/6.
  */
-class TrendingListAdapter(private var data: List<TrendingInfo>) : RecyclerView.Adapter<TrendingListAdapter.ViewHolder>() {
+class TrendingListAdapter(private var context: Context, private var data: List<Repository>) : RecyclerView.Adapter<TrendingListAdapter.ViewHolder>() {
     override fun getItemCount(): Int {
 //        return data!!.size
         return 20
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
 
         if (data.isNotEmpty()) {
-            var info: TrendingInfo = data.get(position)
-            holder!!.headerInfo!!.text = info.owner + "/" + info.repository
-            holder!!.desc!!.text = info.desc
-            holder.languageLogo!!.text = info.languageType
-            holder.userIconList!!.setData(info.iconUrlList)
+            var info: Repository = data.get(position)
+            holder!!.title!!.text = info.title
+            holder!!.desc!!.text = info.description
+            holder!!.forks!!.text = info.forks
+            holder!!.starsToday!!.text = info.todayStars
+            holder!!.starsAll!!.text = info.stars
+            holder!!.language!!.text = info.language
+
         }
+        var users: MutableList<Repository.User> = ArrayList()
+        users.add(Repository.User("1", "https://b-ssl.duitang.com/uploads/item/201603/02/20160302195311_dE35x.thumb.700_0.jpeg"))
+        users.add(Repository.User("2", "https://b-ssl.duitang.com/uploads/item/201512/05/20151205201203_ZUatA.thumb.700_0.jpeg"))
+        users.add(Repository.User("3", "https://b-ssl.duitang.com/uploads/item/201511/12/20151112201742_zuiRH.thumb.700_0.jpeg"))
+        holder!!.avatars!!.setData(users)
+        Log.d("test","${users.size}hahahahahahahha")
+        holder!!.avatars!!.measure(0,0)
 
     }
 
@@ -36,20 +52,22 @@ class TrendingListAdapter(private var data: List<TrendingInfo>) : RecyclerView.A
 
     inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
-        var headerInfo: TextView? = null
+        var title: TextView? = null
         var desc: TextView? = null
-        var languageLogo: TextView? = null
-        var userIconList: UserIconsView? = null
+        var language: TextView? = null
+        var avatars: AvatarsView? = null
+        var starsToday: TextView? = null
+        var starsAll: TextView? = null
+        var forks: TextView? = null
 
         init {
-            headerInfo = itemView!!.findViewById(R.id.header)
-            desc = itemView.findViewById(R.id.desc)
-            languageLogo = itemView.findViewById(R.id.languageType)
-            userIconList = itemView.findViewById(R.id.userIconList)
-        }
-
-        override fun toString(): String {
-            return "ViewHolder(headerInfo=$headerInfo, desc=$desc, languageLogo=$languageLogo, userIconList=$userIconList)"
+            title = itemView!!.findViewById(R.id.title)
+            desc = itemView.findViewById(R.id.description)
+            language = itemView.findViewById(R.id.languageType)
+            avatars = itemView.findViewById(R.id.avatars)
+            starsToday = itemView.findViewById(R.id.starsToday)
+            starsAll = itemView.findViewById(R.id.starsAll)
+            forks = itemView.findViewById(R.id.forks)
         }
 
     }

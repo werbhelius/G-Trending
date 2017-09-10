@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -27,8 +27,16 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
+    <style name="TextStyle.Black.Small">
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="TextStyle.Gray">
         <item name="android:textColor">@color/colorGray</item>
+    </style>
+
+    <style name="TextStyle.Gray.Small">
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="TabLayout.Theme" parent="Widget.Design.TabLayout">
