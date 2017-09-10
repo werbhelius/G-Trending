@@ -35,14 +35,18 @@ class CircleView : View {
 
         paintBorder.isAntiAlias = true
         paintBorder.strokeWidth = 2f
-        paintBorder.style = Paint.Style.STROKE
-        paintBorder.color = resources.getColor(R.color.colorLight)
-        canvas.drawCircle(board / 2, board / 2 , board / 2 - 1f, paintBorder)
+        paintBorder.style = Paint.Style.FILL
+        paintBorder.color = resources.getColor(R.color.colorWhite)
+        canvas.drawCircle(board / 2, board / 2 , 20f, paintBorder)
 
     }
 
     fun setColor(color: Int) {
-        paint.color = color
+        if (color == -1){
+            paint.color = resources.getColor(R.color.colorAccent)
+        }else {
+            paint.color = color
+        }
         invalidate()
     }
 }

@@ -8,8 +8,8 @@
 
     <com.werb.g_trending.view.CircleView
         android:id="@+id/color"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"/>
 
