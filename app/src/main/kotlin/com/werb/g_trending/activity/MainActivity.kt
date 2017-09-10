@@ -10,7 +10,7 @@ import com.werb.g_trending.fragment.TrendingFragment
 import com.werb.g_trending.api.TrendingRequest
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

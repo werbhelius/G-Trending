@@ -5,23 +5,15 @@ package com.werb.g_trending.utils
 enum class Theme {
 
     Default,
-
     Blue,
-
     Indigo,
-
     Green,
-
     Red,
-
     BlueGrey,
-
     Black,
-
     Purple,
-
     Orange,
-
     Pink
 
 }
+

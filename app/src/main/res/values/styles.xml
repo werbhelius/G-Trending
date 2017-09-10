@@ -6,15 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
-    <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Light">
-        <item name="colorControlNormal">@color/colorAccent</item>
+    <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">?attr/colorPrimaryLight</item>
+        <item name="android:textColorPrimary">?attr/colorPrimaryLight</item>
     </style>
 
     <style name="TabLayoutTextStyle" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
+        <item name="android:textColor">?attr/colorPrimaryLight</item>
     </style>
 
     <style name="TextStyle">
@@ -28,6 +29,13 @@
 
     <style name="TextStyle.Gray">
         <item name="android:textColor">@color/colorGray</item>
+    </style>
+
+    <style name="TabLayout.Theme" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">?attr/colorPrimaryLight</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimaryLight</item>
+        <item name="tabTextAppearance">@style/TabLayoutTextStyle</item>
     </style>
 
 </resources>

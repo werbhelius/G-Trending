@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#F5F5F5</color>
-    <color name="colorAccent">#333333</color>
 
-    <color name="colorLight">#DBDBDB</color>
+    <color name="colorLight">#979797</color>
     <color name="colorWhite">#FFFFFF</color>
-
     <color name="colorBlue">#1e90ff</color>
     <color name="colorGray">#9c9c9c</color>
-
     <color name="colorBlack">#333333</color>
+
+    <!-- theme -->
+
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#F5F5F5</color>
+    <color name="colorAccent">#212121</color>
+
+    <color name="blue_primary">#4184f3</color>
+    <color name="blue_primary_dark">#346ac2</color>
+    <color name="blue_accent">#4184f3</color>
+
+    <color name="indigo_primary">#3F51B5</color>
+    <color name="indigo_primary_dark">#303F9F</color>
+    <color name="indigo_accent">#3F51B5</color>
+
+    <color name="green_primary">#0f9f58</color>
+    <color name="green_primary_dark">#0c7e46</color>
+    <color name="green_accent">#0f9f58</color>
+
+    <color name="red_primary">#db4437</color>
+    <color name="red_primary_dark">#B93221</color>
+    <color name="red_accent">#db4437</color>
+
+    <color name="blue_grey_primary">#455a64</color>
+    <color name="blue_grey_primary_dark">#374850</color>
+    <color name="blue_grey_accent">#455a64</color>
+
+    <color name="orange_primary">#FF5722</color>
+    <color name="orange_primary_dark">#D1471C</color>
+    <color name="orange_accent">#FF5722</color>
+
+    <color name="black_primary">#212121</color>
+    <color name="black_primary_dark">#141414</color>
+    <color name="black_accent">#212121</color>
+
+    <color name="purple_primary">#8e24aa</color>
+    <color name="purple_primary_dark">#721d88</color>
+    <color name="purple_accent">#8e24aa</color>
+
+    <color name="pink_primary">#E91E63</color>
+    <color name="pink_primary_dark">#C2185B</color>
+    <color name="pink_accent">#E91E63</color>
 
 </resources>
