@@ -51,6 +51,9 @@ class TrendingListAdapter(private var context: Context, private var data: List<R
                     holder.colorType?.setBackgroundDrawable(drawable)
                 }
             }
+            if (TextUtils.isEmpty(info.todayStars)){
+                holder.starsToday?.text = "no stars today"
+            }
         }
     }
 

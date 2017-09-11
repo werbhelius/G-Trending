@@ -44,20 +44,17 @@ class TrendingFragment : Fragment() {
             request()
         }
 
-        if (first) refresh.isRefreshing = true
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser){
-            request()
+        if (first) {
+            refresh.isRefreshing = true
+            request ()
         }
+
     }
 
     private fun request() {
         TrendingRequest.repository(language)
                 .doFinally {
-                    refresh.isRefreshing = false
+                    refresh?.isRefreshing = false
                     first = false
                 }
                 .subscribe {
