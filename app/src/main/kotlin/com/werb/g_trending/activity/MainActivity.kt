@@ -1,13 +1,10 @@
 package com.werb.g_trending.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
 import com.werb.g_trending.R
 import com.werb.g_trending.adapter.TabLayoutAdapter
 import com.werb.g_trending.fragment.TrendingFragment
-import com.werb.g_trending.api.TrendingRequest
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -15,13 +12,9 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         initToolbar()
         initTabLayout()
 
-        TrendingRequest.developer("").subscribe {
-            println(it.size)
-        }
     }
 
     private fun initToolbar() {
@@ -31,18 +24,19 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initTabLayout() {
-        val fragments = arrayListOf<Fragment>().apply {
-            for (i in 1..10){
-                add(TrendingFragment.newInstance())
+        val array = resources.getStringArray(R.array.trending)
+        val fragments = arrayListOf<TrendingFragment>().apply {
+            for (i in 1..array.size) {
+                add(TrendingFragment.newInstance(array[i-1]))
             }
         }
-        content_viewPager.offscreenPageLimit = 5
-        content_viewPager.adapter = TabLayoutAdapter(supportFragmentManager, fragments, resources.getStringArray(R.array.trending))
+        content_viewPager.offscreenPageLimit = array.size
+        content_viewPager.adapter = TabLayoutAdapter(supportFragmentManager,fragments, array)
         tabLayout.setupWithViewPager(content_viewPager)
     }
 
     private val menuClickListener = Toolbar.OnMenuItemClickListener {
-        when (it.itemId){
+        when (it.itemId) {
             R.id.action_theme -> ThemeActivity.startActivity(this@MainActivity)
         }
         return@OnMenuItemClickListener true

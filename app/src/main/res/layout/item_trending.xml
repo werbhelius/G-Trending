@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="@dimen/paddingLarge"
+    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/colorType"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginRight="5dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/languageType"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/languageType"
+                style="@style/TextStyle.Gray.Small"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                tools:text="Java" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/title"
+                style="@style/TextStyle.Black"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="@dimen/paddingNormal"
+                android:layout_toLeftOf="@id/colorType"
+                android:layout_centerVertical="true"
+                android:ellipsize="end"
+                android:lines="1"
+                tools:text="Ksndsdaa / Kotlin" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/description"
+            style="@style/TextStyle.Black"
+            android:layout_below="@id/titleLayout"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            tools:text="This is a very interesting project, we are trying to do it well and hope you like it."
+            android:lineSpacingMultiplier="1.1"
+            android:textColor="@color/colorBlackLight" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/starsToday"
+            style="@style/TextStyle.Gray.Small"
+            android:layout_below="@id/description"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="1dp"
+            android:drawableLeft="@drawable/svg_star"
+            android:textSize="12sp"
+            tools:text="274 stars today" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/starsToday"
+            android:layout_marginTop="2dp"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/starsAll"
+                style="@style/TextStyle.Gray.Small"
+                android:layout_marginRight="@dimen/paddingXNormal"
+                android:drawablePadding="1dp"
+                android:drawableLeft="@drawable/svg_star"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textSize="12sp"
+                tools:text="1932" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/forks"
+                style="@style/TextStyle.Gray.Small"
+                android:layout_marginRight="@dimen/paddingXNormal"
+                android:drawablePadding="1dp"
+                android:drawableLeft="@drawable/svg_fork"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textSize="12sp"
+                tools:text="1932" />
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/TextStyle.Gray.Small"
+                android:layout_gravity="center_vertical"
+                android:text="Built by " />
+
+            <com.werb.g_trending.view.AvatarsView
+                android:id="@+id/avatars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

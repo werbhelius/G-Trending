@@ -26,6 +26,7 @@ class AvatarsView : LinearLayout {
     }
 
     fun setData(data: MutableList<Repository.User>) {
+        removeAllViews()
         for (user in data) {
             addChildView(user.avatar)
         }

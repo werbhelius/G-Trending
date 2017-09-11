@@ -75,7 +75,7 @@ object TrendingRequest {
                             images.onEach {
                                 val name = it.attr("title")
                                 val avatar = it.attr("src")
-                                User(name, avatar)
+                                users.add(User(name, avatar))
                             }
                         }
                         val trending = Repository(title, description, stars, forks, color, todayStars, language, contributors, users)

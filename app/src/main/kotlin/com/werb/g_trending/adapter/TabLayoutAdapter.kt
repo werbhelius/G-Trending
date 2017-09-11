@@ -3,6 +3,7 @@ package com.werb.g_trending.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.view.ViewGroup
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/6. */
 
@@ -13,4 +14,8 @@ class TabLayoutAdapter(fm: FragmentManager, private val fragments: List<Fragment
     override fun getCount(): Int = titles.size
 
     override fun getPageTitle(position: Int): CharSequence = titles[position]
+
+    override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
+//        super.destroyItem(container, position, `object`)
+    }
 }
