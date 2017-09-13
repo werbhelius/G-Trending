@@ -2,11 +2,11 @@ package com.werb.g_trending.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/6. */
 
-class TabLayoutAdapter(fm: FragmentManager, private val fragments: List<Fragment>, private val titles: Array<String>) : FragmentPagerAdapter(fm) {
+class TabLayoutAdapter(fm: FragmentManager, private val fragments: List<Fragment>, private val titles: Array<String>) : FragmentStatePagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment = fragments[position]
 

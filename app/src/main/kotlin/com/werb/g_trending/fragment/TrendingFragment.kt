@@ -18,20 +18,17 @@ import kotlinx.android.synthetic.main.fragment_trending.*
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/6. */
 
-class TrendingFragment : Fragment() {
+class TrendingFragment : LazyLoadFragment() {
 
     private lateinit var adapter: TrendingListAdapter
     private var language = ""
     private var refresh: SwipeRefreshLayout? = null
-    private var data = listOf<Repository>()
-    private var show = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
         language = arguments.getString(ARG_LANGUAGE)
         adapter = TrendingListAdapter(context)
-        request()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,35 +42,21 @@ class TrendingFragment : Fragment() {
         recyclerView.addItemDecoration(ItemDecoration(context))
         recyclerView.adapter = adapter
         refresh?.setOnRefreshListener {
-            request()
-        }
-        if (data.isEmpty()) refresh?.isRefreshing = true
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
-            show = true
-            loadData(data)
-        }else {
-            show = false
+            requestData()
         }
     }
 
-    private fun request() {
+    override fun requestData() {
         TrendingRequest.repository(language)
+                .doOnSubscribe {
+                    refresh?.isRefreshing = true
+                }
                 .subscribe({
-                    data = it
-                    loadData(data)
-                }, { it.printStackTrace() })
-    }
-
-    private fun loadData(repos: List<Repository>) {
-        if (repos.isNotEmpty() && show) {
-            adapter.clear()
-            adapter.addItem(data)
-            refresh?.isRefreshing = false
-        }
+                    adapter.clear()
+                    adapter.addItem(it)
+                }, { it.printStackTrace() }, {
+                    refresh?.isRefreshing = false
+                })
     }
 
     companion object {
