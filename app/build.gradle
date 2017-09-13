@@ -45,4 +45,8 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.0.2'
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation 'com.github.markzhai:blockcanary-android:1.5.0'
+    implementation 'com.google.code.gson:gson:2.8.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.3.0"
 }

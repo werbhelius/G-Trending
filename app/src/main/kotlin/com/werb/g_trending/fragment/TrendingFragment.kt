@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import com.werb.g_trending.R
 import com.werb.g_trending.adapter.TrendingListAdapter
 import com.werb.g_trending.api.TrendingRequest
+import com.werb.g_trending.model.Repository
 import com.werb.g_trending.utils.ResourcesUtils
 import kotlinx.android.synthetic.main.fragment_trending.*
 
@@ -22,12 +23,15 @@ class TrendingFragment : Fragment() {
     private lateinit var adapter: TrendingListAdapter
     private var language = ""
     private var refresh: SwipeRefreshLayout? = null
+    private var data = listOf<Repository>()
+    private var show = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
         language = arguments.getString(ARG_LANGUAGE)
         adapter = TrendingListAdapter(context)
+        request()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,16 +47,33 @@ class TrendingFragment : Fragment() {
         refresh?.setOnRefreshListener {
             request()
         }
-        request()
+        if (data.isEmpty()) refresh?.isRefreshing = true
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            show = true
+            loadData(data)
+        }else {
+            show = false
+        }
     }
 
     private fun request() {
         TrendingRequest.repository(language)
-                .doOnSubscribe { refresh?.isRefreshing = true }
                 .subscribe({
-                    adapter.clear()
-                    adapter.addItem(it)
-                }, { it.printStackTrace() }, {refresh?.isRefreshing = false})
+                    data = it
+                    loadData(data)
+                }, { it.printStackTrace() })
+    }
+
+    private fun loadData(repos: List<Repository>) {
+        if (repos.isNotEmpty() && show) {
+            adapter.clear()
+            adapter.addItem(data)
+            refresh?.isRefreshing = false
+        }
     }
 
     companion object {

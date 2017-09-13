@@ -6,6 +6,7 @@ import com.werb.g_trending.R
 import com.werb.g_trending.adapter.TabLayoutAdapter
 import com.werb.g_trending.fragment.TrendingFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : BaseActivity() {
 
@@ -37,7 +38,7 @@ class MainActivity : BaseActivity() {
 
     private val menuClickListener = Toolbar.OnMenuItemClickListener {
         when (it.itemId) {
-            R.id.action_theme -> ThemeActivity.startActivity(this@MainActivity)
+            R.id.action_theme -> ThemeDialog().show(supportFragmentManager, "theme")
         }
         return@OnMenuItemClickListener true
     }

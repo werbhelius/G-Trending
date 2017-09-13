@@ -2,6 +2,7 @@ package com.werb.g_trending.adapter
 
 import android.content.Context
 import android.graphics.Color
+import android.support.v4.app.DialogFragment
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.item_theme.view.*
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/8. */
 
-class ThemeAdapter(private val context: Context) : RecyclerView.Adapter<ThemeAdapter.ThemeViewHolder>() {
+class ThemeAdapter(private val context: Context, private val dialog: DialogFragment) : RecyclerView.Adapter<ThemeAdapter.ThemeViewHolder>() {
 
     private val list: List<ThemeModel> by lazy { initData() }
     private var lastPosition = 0
@@ -77,6 +78,7 @@ class ThemeAdapter(private val context: Context) : RecyclerView.Adapter<ThemeAda
             notifyItemChanged(lastPosition)
             lastPosition = layoutPosition
             itemView.postDelayed({
+                dialog.dismiss()
                 Preference.setTheme(context, Theme.valueOf(themeModel.name))
                 RxEvent.send(ThemeEvent())
             }, 250)

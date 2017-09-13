@@ -7,20 +7,15 @@ import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
 object RxHelper {
+
     fun <T> getObservable(observable: Observable<T>): Observable<T> {
         return observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun <T> safeObservable(observable: Observable<T>): Observable<T> {
-        return getObservable(observable)
-                .doOnError(Consumer<Throwable> { it.printStackTrace() })
-    }
-
-    fun <T> getSingle(single: Single<T>): Single<T> {
-        return single
+    fun <T> getPostObservable(observable: Observable<T>): Observable<T> {
+        return observable
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
     }
 }

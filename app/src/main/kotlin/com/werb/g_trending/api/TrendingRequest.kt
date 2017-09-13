@@ -11,7 +11,6 @@ import io.reactivex.schedulers.Schedulers
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
-import java.net.URL
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/6. */
 
@@ -22,8 +21,8 @@ object TrendingRequest {
     private val baseUrl = "https://github.com/trending"
 
     fun repository(lang: String?, daily: DailyType = DailyType.TODAY): Observable<List<Repository>> {
-        val url = buildUrl(baseUrl, lang, daily)
-        return RxHelper.getObservable(requestRepos(url))
+        return RxHelper.getObservable(JSoupProvider.getTrendingService().getTrending(lang, buildDaily(daily)))
+                .flatMap {RxHelper.getObservable(requestRepos(it)) }
     }
 
     fun developer(lang: String?, daily: DailyType = DailyType.TODAY): Observable<List<Developer>> {
@@ -43,12 +42,19 @@ object TrendingRequest {
         }
     }
 
+    private fun buildDaily(daily: DailyType): String {
+        return  when (daily) {
+            DailyType.TODAY -> "daily"
+            DailyType.WEEK -> "weekly"
+            DailyType.MONTH -> "monthly"
+        }
+    }
+
 
     private fun requestRepos(url: String): Observable<List<Repository>> {
         return Observable.fromPublisher { s->
             val trendingList = mutableListOf<Repository>()
-            val text = URL(url).readText()
-            val document: Document = Jsoup.parse(text)
+            val document: Document = Jsoup.parse(url)
             val repoList = document.select(".repo-list")
             if (repoList.isNotEmpty()) {
                 val list: Elements? = repoList.select("li")

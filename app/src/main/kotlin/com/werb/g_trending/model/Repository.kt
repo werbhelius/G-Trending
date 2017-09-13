@@ -12,6 +12,14 @@ data class Repository(val title: String?,
                       val contributors: String,
                       var users: MutableList<User>) {
 
-    data class User(val name: String, val avatar: String)
+    data class User(val name: String, val avatar: String) {
+
+    }
+
+    override fun toString(): String {
+        return "Repository(title=$title, description='$description', stars=$stars, forks=$forks, color=$color, todayStars=$todayStars, language=$language, contributors='$contributors', users=$users)"
+    }
+
+
 }
 

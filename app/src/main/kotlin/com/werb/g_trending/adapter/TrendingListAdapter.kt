@@ -27,13 +27,14 @@ import java.util.ArrayList
  */
 class TrendingListAdapter(private var context: Context) : RecyclerView.Adapter<TrendingListAdapter.ViewHolder>() {
 
-    private var data: MutableList<Repository> = mutableListOf()
+    var data: MutableList<Repository> = mutableListOf()
+        private set
 
     override fun getItemCount(): Int {
         return data.size
     }
 
-    fun clear(){
+    fun clear() {
         data.clear()
         notifyDataSetChanged()
     }
@@ -41,7 +42,7 @@ class TrendingListAdapter(private var context: Context) : RecyclerView.Adapter<T
     fun addItem(repos: List<Repository>) {
         repos.forEach {
             data.add(it)
-            notifyItemInserted(data.size -1)
+            notifyItemInserted(data.size - 1)
         }
     }
 
@@ -66,7 +67,7 @@ class TrendingListAdapter(private var context: Context) : RecyclerView.Adapter<T
                     holder.colorType?.setBackgroundDrawable(drawable)
                 }
             }
-            if (TextUtils.isEmpty(info.todayStars)){
+            if (TextUtils.isEmpty(info.todayStars)) {
                 holder.starsToday?.text = "no stars today"
             }
         }
