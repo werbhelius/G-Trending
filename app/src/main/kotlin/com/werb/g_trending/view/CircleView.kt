@@ -37,7 +37,7 @@ class CircleView : View {
         paintBorder.strokeWidth = 2f
         paintBorder.style = Paint.Style.FILL
         paintBorder.color = resources.getColor(R.color.colorWhite)
-        canvas.drawCircle(board / 2, board / 2 , 20f, paintBorder)
+        canvas.drawCircle(board / 2, board / 2 , 15f, paintBorder)
 
     }
 

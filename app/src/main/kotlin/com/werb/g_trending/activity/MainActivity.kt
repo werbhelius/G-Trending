@@ -6,7 +6,6 @@ import com.werb.g_trending.R
 import com.werb.g_trending.adapter.TabLayoutAdapter
 import com.werb.g_trending.fragment.TrendingFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : BaseActivity() {
 

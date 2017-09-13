@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">G-Trending</string>
+    <string name="app_name">Trending</string>
     <string name="menu_theme">Theme</string>
     <string name="menu_language">Language</string>
     <string name="menu_about">About</string>
