@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.item_theme.view.*
 class ThemeAdapter(private val context: Context) : RecyclerView.Adapter<ThemeAdapter.ThemeViewHolder>() {
 
     private val list: List<ThemeModel> by lazy { initData() }
+    private var lastPosition = 0
 
     private fun initData(): List<ThemeModel> {
         val themes = arrayListOf<ThemeModel>()
@@ -48,23 +49,38 @@ class ThemeAdapter(private val context: Context) : RecyclerView.Adapter<ThemeAda
         private val color = itemView.color
         private val str = itemView.str
         private val select = itemView.select
+        private lateinit var themeModel: ThemeModel
 
         fun bindData(themeModel: ThemeModel) {
+            this.themeModel = themeModel
             color.setColor(themeModel.color)
             str.text = themeModel.name
             select.isChecked = themeModel.select
 
-            select.setOnClickListener {
-                list.forEach {
-                    it.select = list.indexOf(it) == layoutPosition
-                }
-                notifyDataSetChanged()
+            if (themeModel.select) lastPosition = layoutPosition
 
-                Preference.setTheme(context, Theme.valueOf(themeModel.name))
-                RxEvent.send(ThemeEvent())
-            }
+            select.setOnClickListener(clickListener)
+            itemView.setOnClickListener(clickListener)
         }
 
+        private val clickListener = View.OnClickListener {
+            if (lastPosition == layoutPosition) {
+                select.isChecked = true
+                return@OnClickListener
+            }
+            list.forEach {
+                if (list.indexOf(it) == layoutPosition) {
+                    select.isChecked = true
+                    list[lastPosition].select = false
+                }
+            }
+            notifyItemChanged(lastPosition)
+            lastPosition = layoutPosition
+            itemView.postDelayed({
+                Preference.setTheme(context, Theme.valueOf(themeModel.name))
+                RxEvent.send(ThemeEvent())
+            }, 250)
+        }
     }
 
 }

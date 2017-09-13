@@ -33,13 +33,10 @@ class AvatarsView : LinearLayout {
     }
 
     private fun addChildView(imageUrl: String) {
-        var childImage = LayoutInflater.from(context).inflate(R.layout.item_avatar, null) as SimpleDraweeView
-        childImage.setImageURI(imageUrl)
-        var lp: LinearLayout.LayoutParams = LinearLayout.LayoutParams(-2, -2)
-        lp.width = ResourcesUtils.dp2px(context, 20f)
-        lp.height = ResourcesUtils.dp2px(context, 20f)
-        lp.leftMargin = ResourcesUtils.dp2px(context, 3f)
-        addView(childImage,lp)
+        val layout = LayoutInflater.from(context).inflate(R.layout.item_avatar, this, false) as LinearLayout
+        val avatar = layout.findViewById<SimpleDraweeView>(R.id.itemAvatar)
+        avatar.setImageURI(imageUrl )
+        addView(layout)
     }
 
 

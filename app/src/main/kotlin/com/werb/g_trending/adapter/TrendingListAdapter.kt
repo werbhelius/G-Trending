@@ -13,7 +13,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.g_trending.R
 import com.werb.g_trending.model.Repository
 import com.werb.g_trending.view.AvatarsView
@@ -23,24 +25,37 @@ import java.util.ArrayList
 /**
  * Created by liuxi on 2017/9/6.
  */
-class TrendingListAdapter(private var context: Context, private var data: List<Repository>) : RecyclerView.Adapter<TrendingListAdapter.ViewHolder>() {
+class TrendingListAdapter(private var context: Context) : RecyclerView.Adapter<TrendingListAdapter.ViewHolder>() {
+
+    private var data: MutableList<Repository> = mutableListOf()
+
     override fun getItemCount(): Int {
         return data.size
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    fun clear(){
+        data.clear()
+        notifyDataSetChanged()
+    }
+
+    fun addItem(repos: List<Repository>) {
+        repos.forEach {
+            data.add(it)
+            notifyItemInserted(data.size -1)
+        }
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         if (data.isNotEmpty()) {
             val info: Repository = data[position]
-            holder.title!!.text = info.title
-            holder.desc!!.text = info.description
-            holder.forks!!.text = info.forks
-            holder.starsToday!!.text = info.todayStars
-            holder.starsAll!!.text = info.stars
-            holder.language!!.text = info.language
+            holder.title?.text = info.title
+            holder.desc?.text = info.description
+            holder.forks?.text = info.forks
+            holder.starsToday?.text = info.todayStars
+            holder.starsAll?.text = info.stars
+            holder.language?.text = info.language
             holder.avatars?.setData(info.users)
-            holder.avatars?.measure(0, 0)
             if (TextUtils.isEmpty(info.color)) {
                 holder.colorType?.visibility = View.GONE
             } else {
@@ -58,7 +73,7 @@ class TrendingListAdapter(private var context: Context, private var data: List<R
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent!!.context).inflate(R.layout.item_trending, null))
+        return ViewHolder(LayoutInflater.from(parent!!.context).inflate(R.layout.item_trending, parent, false))
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

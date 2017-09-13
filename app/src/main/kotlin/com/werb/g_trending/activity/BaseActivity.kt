@@ -13,16 +13,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/10. */
 
-open class BaseActivity: AppCompatActivity() {
+open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initTheme()
         super.onCreate(savedInstanceState)
-
         initEvent()
     }
 
-    private fun initTheme(){
+    private fun initTheme() {
         val theme = Preference.getTheme(this)
         when (theme) {
             Theme.Default -> this.setTheme(R.style.DefaultTheme)
@@ -40,18 +39,22 @@ open class BaseActivity: AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (theme == Theme.Default) {
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            }else {
+            } else {
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
             }
         }
     }
 
-    private fun initEvent(){
+    private fun initEvent() {
         RxEvent.toObservable(ThemeEvent::class.java)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     recreate()
                 })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 }

@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.werb.g_trending.R
 import com.werb.g_trending.adapter.ThemeAdapter
-import kotlinx.android.synthetic.main.activity_theme.*
+import kotlinx.android.synthetic.main.widget_view_theme.*
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/8. */
 
@@ -13,7 +13,7 @@ class ThemeActivity: BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_theme)
+        setContentView(R.layout.widget_view_theme)
 
         toolbar.title = getString(R.string.menu_theme)
         setSupportActionBar(toolbar)

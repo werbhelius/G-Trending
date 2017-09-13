@@ -30,7 +30,7 @@ class MainActivity : BaseActivity() {
                 add(TrendingFragment.newInstance(array[i-1]))
             }
         }
-        content_viewPager.offscreenPageLimit = 4
+        content_viewPager.offscreenPageLimit = array.size
         content_viewPager.adapter = TabLayoutAdapter(supportFragmentManager,fragments, array)
         tabLayout.setupWithViewPager(content_viewPager)
     }

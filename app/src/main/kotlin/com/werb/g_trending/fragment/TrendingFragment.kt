@@ -3,9 +3,8 @@ package com.werb.g_trending.fragment
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import android.view.ViewGroup
 import com.werb.g_trending.R
 import com.werb.g_trending.adapter.TrendingListAdapter
 import com.werb.g_trending.api.TrendingRequest
-import com.werb.g_trending.model.Repository
 import com.werb.g_trending.utils.ResourcesUtils
 import kotlinx.android.synthetic.main.fragment_trending.*
 
@@ -21,47 +19,40 @@ import kotlinx.android.synthetic.main.fragment_trending.*
 
 class TrendingFragment : Fragment() {
 
-    private val data: MutableList<Repository> by lazy { mutableListOf<Repository>() }
-    private val adapter: TrendingListAdapter by lazy { TrendingListAdapter(context, data) }
+    private lateinit var adapter: TrendingListAdapter
     private var language = ""
-    private var first = true
+    private var refresh: SwipeRefreshLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
+        language = arguments.getString(ARG_LANGUAGE)
+        adapter = TrendingListAdapter(context)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        language = arguments.getString(ARG_LANGUAGE)
-        return inflater?.inflate(R.layout.fragment_trending, container, false)
+        return inflater?.inflate(R.layout.fragment_trending, container, false).apply {
+            refresh = this?.findViewById(R.id.refresh)
+        }
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.addItemDecoration(ItemDecoration(context))
         recyclerView.adapter = adapter
-        refresh.setOnRefreshListener {
+        refresh?.setOnRefreshListener {
             request()
         }
-
-        if (first) {
-            refresh.isRefreshing = true
-            request ()
-        }
-
+        request()
     }
 
     private fun request() {
         TrendingRequest.repository(language)
-                .doFinally {
-                    refresh?.isRefreshing = false
-                    first = false
-                }
-                .subscribe {
-                    data.clear()
-                    data.addAll(it)
-                    adapter.notifyDataSetChanged()
-                }
+                .doOnSubscribe { refresh?.isRefreshing = true }
+                .subscribe({
+                    adapter.clear()
+                    adapter.addItem(it)
+                }, { it.printStackTrace() }, {refresh?.isRefreshing = false})
     }
 
     companion object {
@@ -74,7 +65,6 @@ class TrendingFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private inner class ItemDecoration(private val context: Context) : RecyclerView.ItemDecoration() {
