@@ -15,7 +15,7 @@ class MyApp: Application() {
     override fun onCreate() {
         super.onCreate()
         sContext = this
-        BlockCanary.install(this, AppContext()).start()
+//        BlockCanary.install(this, AppContext()).start()
         Fresco.initialize(this)
     }
 

@@ -22,6 +22,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.LanguageActivity"/>
+
     </application>
 
 </manifest>

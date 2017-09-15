@@ -7,7 +7,6 @@ import android.widget.LinearLayout
 import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.g_trending.R
 import com.werb.g_trending.model.Repository
-import com.werb.g_trending.utils.ResourcesUtils
 
 /**
  *

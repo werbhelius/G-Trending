@@ -38,6 +38,7 @@ class MainActivity : BaseActivity() {
     private val menuClickListener = Toolbar.OnMenuItemClickListener {
         when (it.itemId) {
             R.id.action_theme -> ThemeDialog().show(supportFragmentManager, "theme")
+            R.id.action_language -> LanguageActivity.startActivity(this@MainActivity)
         }
         return@OnMenuItemClickListener true
     }
