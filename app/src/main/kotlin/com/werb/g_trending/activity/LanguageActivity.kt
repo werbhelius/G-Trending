@@ -4,11 +4,18 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.werb.g_trending.R
+import com.werb.g_trending.adapter.LanguageViewHolder
+import com.werb.g_trending.utils.ColorUtils
+import com.werb.g_trending.utils.Preference
+import com.werb.library.MoreAdapter
+import com.werb.library.link.RegisterItem
 import kotlinx.android.synthetic.main.activity_language.*
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/15. */
 
 class LanguageActivity : BaseActivity() {
+
+    private val adapter: MoreAdapter by lazy { MoreAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +25,19 @@ class LanguageActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { finish() }
+
+        adapter.apply {
+            register(RegisterItem(R.layout.item_language, LanguageViewHolder::class.java))
+            attachTo(recyclerView)
+        }
+
+        val languages = Preference.getLanguage(this)
+        languages.forEach {
+            val language = ColorUtils.getColor(it)
+            language?.let {
+                adapter.loadData(it)
+            }
+        }
     }
 
     override fun finish() {

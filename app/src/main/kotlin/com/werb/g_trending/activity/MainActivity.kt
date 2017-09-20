@@ -5,6 +5,7 @@ import android.support.v7.widget.Toolbar
 import com.werb.g_trending.R
 import com.werb.g_trending.adapter.TabLayoutAdapter
 import com.werb.g_trending.fragment.TrendingFragment
+import com.werb.g_trending.utils.Preference
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -24,7 +25,11 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initTabLayout() {
-        val array = resources.getStringArray(R.array.trending)
+        var array = Preference.getLanguage(this)
+        if (array.isEmpty()) {
+            array = resources.getStringArray(R.array.trending)
+            Preference.setLanguage(this, array)
+        }
         val fragments = arrayListOf<TrendingFragment>().apply {
             for (i in 1..array.size) {
                 add(TrendingFragment.newInstance(array[i-1]))

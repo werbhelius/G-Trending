@@ -8,8 +8,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="0dp">
+        android:layout_height="wrap_content">
 
         <!-- ToolBar-->
         <android.support.v7.widget.Toolbar
@@ -18,5 +17,12 @@
             android:layout_height="?attr/actionBarSize"
             app:theme="@style/toolbar_theme" />
     </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layoutManager="LinearLayoutManager"/>
 
 </LinearLayout>
