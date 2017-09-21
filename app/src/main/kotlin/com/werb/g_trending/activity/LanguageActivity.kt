@@ -10,8 +10,11 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import com.werb.g_trending.R
 import com.werb.g_trending.adapter.LanguageViewHolder
+import com.werb.g_trending.model.Language
 import com.werb.g_trending.utils.ColorUtils
 import com.werb.g_trending.utils.Preference
+import com.werb.g_trending.utils.RxEvent
+import com.werb.g_trending.utils.event.LanguageEvent
 import com.werb.library.MoreAdapter
 import com.werb.library.action.MoreClickListener
 import com.werb.library.link.RegisterItem
@@ -92,7 +95,18 @@ class LanguageActivity : BaseActivity() {
         handler.postDelayed(runnable, 750)
     }
 
-    private var runnable: Runnable = Runnable { }
+    private var runnable: Runnable = Runnable {
+        val Languages = arrayOfNulls<String>(10)
+        adapter.list.forEach {
+            if (it is Language) {
+                Languages[adapter.list.indexOf(it)] = it.name
+            }
+        }
+        if (Languages.isNotEmpty()) {
+            Preference.setLanguage(this, Languages)
+            RxEvent.send(LanguageEvent())
+        }
+    }
 
 
     override fun finish() {

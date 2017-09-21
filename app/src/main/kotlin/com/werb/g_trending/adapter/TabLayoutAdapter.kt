@@ -9,7 +9,7 @@ import android.view.ViewGroup
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/6. */
 
-class TabLayoutAdapter(private val  fm: FragmentManager, private val fragments: List<Fragment>, private val titles: Array<String>) : FragmentStatePagerAdapter(fm) {
+class TabLayoutAdapter(fm: FragmentManager, private val fragments: List<Fragment>, private val titles: Array<String>) : FragmentStatePagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment = fragments[position]
 

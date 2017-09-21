@@ -6,6 +6,9 @@ import com.werb.g_trending.R
 import com.werb.g_trending.adapter.TabLayoutAdapter
 import com.werb.g_trending.fragment.TrendingFragment
 import com.werb.g_trending.utils.Preference
+import com.werb.g_trending.utils.RxEvent
+import com.werb.g_trending.utils.event.LanguageEvent
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -15,6 +18,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         initToolbar()
         initTabLayout()
+        initEvent()
 
     }
 
@@ -38,6 +42,14 @@ class MainActivity : BaseActivity() {
         content_viewPager.offscreenPageLimit = array.size
         content_viewPager.adapter = TabLayoutAdapter(supportFragmentManager,fragments, array)
         tabLayout.setupWithViewPager(content_viewPager)
+    }
+
+    private fun initEvent() {
+        RxEvent.toObservable(LanguageEvent::class.java)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    initTabLayout()
+                })
     }
 
     private val menuClickListener = Toolbar.OnMenuItemClickListener {
