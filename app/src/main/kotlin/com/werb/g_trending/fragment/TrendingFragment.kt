@@ -3,24 +3,24 @@ package com.werb.g_trending.fragment
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.werb.g_trending.R
-import com.werb.g_trending.adapter.TrendingListAdapter
+import com.werb.g_trending.adapter.RepositoryViewHolder
 import com.werb.g_trending.api.TrendingRequest
-import com.werb.g_trending.model.Repository
 import com.werb.g_trending.utils.ResourcesUtils
+import com.werb.library.MoreAdapter
+import com.werb.library.link.RegisterItem
 import kotlinx.android.synthetic.main.fragment_trending.*
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/6. */
 
 class TrendingFragment : LazyLoadFragment() {
 
-    private lateinit var adapter: TrendingListAdapter
+    private val adapter: MoreAdapter by lazy { MoreAdapter() }
     private var language = ""
     private var refresh: SwipeRefreshLayout? = null
 
@@ -28,7 +28,6 @@ class TrendingFragment : LazyLoadFragment() {
         super.onCreate(savedInstanceState)
         retainInstance = true
         language = arguments.getString(ARG_LANGUAGE)
-        adapter = TrendingListAdapter(context)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,7 +39,10 @@ class TrendingFragment : LazyLoadFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.addItemDecoration(ItemDecoration(context))
-        recyclerView.adapter = adapter
+        adapter.apply {
+            register(RegisterItem(R.layout.item_trending, RepositoryViewHolder::class.java))
+            attachTo(recyclerView)
+        }
         refresh?.setOnRefreshListener {
             requestData()
         }
@@ -52,8 +54,8 @@ class TrendingFragment : LazyLoadFragment() {
                     refresh?.isRefreshing = true
                 }
                 .subscribe({
-                    adapter.clear()
-                    adapter.addItem(it)
+                    adapter.removeAllData()
+                    adapter.loadData(it)
                 }, { it.printStackTrace() }, {
                     refresh?.isRefreshing = false
                 })

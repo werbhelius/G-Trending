@@ -17,6 +17,9 @@ class LanguageViewHolder(containerView: View) : MoreViewHolder<Language>(contain
         val drawable = containerView.context.resources.getDrawable(R.drawable.oval_drawable)
         drawable.setColorFilter(Color.parseColor(data.color), PorterDuff.Mode.SRC)
         colorType.setBackgroundDrawable(drawable)
+
+        containerView.tag = this
+        addOnLongClickListener(containerView)
     }
 
 
