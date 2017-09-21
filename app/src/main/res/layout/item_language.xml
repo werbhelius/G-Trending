@@ -9,25 +9,35 @@
         android:id="@+id/colorType"
         android:layout_width="23dp"
         android:layout_height="23dp"
-        android:layout_marginLeft="16dp"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="16dp" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/name"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="25dp"
+        android:layout_weight="1"
         android:textColor="@color/colorBlack"
-        android:textSize="17sp"/>
+        android:textSize="17sp" />
 
-    <android.support.v7.widget.AppCompatImageView
+
+    <FrameLayout
+        android:id="@+id/delete"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/svg_menu"
-        android:layout_gravity="center_vertical"/>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+
+            android:layout_marginRight="16dp"
+            android:src="@drawable/svg_menu" />
+
+    </FrameLayout>
+
 
 </LinearLayout>

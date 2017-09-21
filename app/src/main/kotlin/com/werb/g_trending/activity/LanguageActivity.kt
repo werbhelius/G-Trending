@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
@@ -52,6 +53,17 @@ class LanguageActivity : BaseActivity() {
     }
 
     private val itemClickListener = object: MoreClickListener(){
+
+        override fun onItemClick(view: View, position: Int) {
+            val alertDialog = AlertDialog.Builder(this@LanguageActivity)
+            alertDialog.setMessage(R.string.delete_language)
+            alertDialog.setPositiveButton(R.string.delete, {_, _ ->
+                adapter.removeData(position)
+            })
+            alertDialog.setNegativeButton(R.string.cancel, {dialog,_ ->  dialog.dismiss()})
+            alertDialog.show()
+        }
+
         override fun onItemLongClick(view: View, position: Int): Boolean {
             val holder =  view.tag as LanguageViewHolder
             itemTouchHelper.startDrag(holder)

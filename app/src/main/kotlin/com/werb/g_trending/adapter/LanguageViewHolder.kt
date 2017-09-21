@@ -2,6 +2,7 @@ package com.werb.g_trending.adapter
 
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.support.v7.app.AlertDialog
 import android.view.View
 import com.werb.g_trending.R
 import com.werb.g_trending.model.Language
@@ -12,6 +13,8 @@ import kotlinx.android.synthetic.main.item_language.*
 
 class LanguageViewHolder(containerView: View) : MoreViewHolder<Language>(containerView) {
 
+    private val context = containerView.context
+
     override fun bindData(data: Language) {
         name.text = data.name
         val drawable = containerView.context.resources.getDrawable(R.drawable.oval_drawable)
@@ -20,6 +23,9 @@ class LanguageViewHolder(containerView: View) : MoreViewHolder<Language>(contain
 
         containerView.tag = this
         addOnLongClickListener(containerView)
+
+        delete.tag = data
+        addOnClickListener(delete)
     }
 
 

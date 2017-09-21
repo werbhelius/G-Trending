@@ -14,4 +14,8 @@
     <string name="theme_purple">Purple</string>
     <string name="theme_orange">Orange</string>
     <string name="theme_pink">Pink</string>
+
+    <string name="delete_language">Delete this item?</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
 </resources>
