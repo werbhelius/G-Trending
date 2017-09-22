@@ -18,4 +18,5 @@
     <string name="delete_language">Delete this item?</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="size_up_one">Size must greater than one</string>
 </resources>

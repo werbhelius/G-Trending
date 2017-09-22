@@ -22,16 +22,17 @@ object Preference {
 
     fun getTheme(context: Context): Theme = Theme.valueOf(getSharedPreferences(context).getString(THEME, Theme.Default.name))
 
-    fun setLanguage(context: Context, languages: Array<String?>){
+    fun setLanguage(context: Context, languages: MutableList<String>){
         val editor = getSharedPreferences(context).edit()
         editor.putString(LANGUAGE, Gson().toJson(languages))
         editor.apply()
     }
 
-    fun getLanguage(context: Context): Array<String> {
+    @Suppress("UNCHECKED_CAST")
+    fun getLanguage(context: Context):  MutableList<String> {
         val str = getSharedPreferences(context).getString(LANGUAGE, "")
-        val fromJson = Gson().fromJson(str, Array<String>::class.java)
-        return fromJson?.let { it } ?: arrayOf()
+        val fromJson = Gson().fromJson(str, MutableList::class.java)
+        return fromJson?.let { it } as MutableList<String>? ?: mutableListOf()
     }
 
 }

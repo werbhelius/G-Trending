@@ -9,13 +9,16 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
+import android.widget.Toast
 import com.werb.g_trending.R
 import com.werb.g_trending.adapter.LanguageViewHolder
 import com.werb.g_trending.model.Language
 import com.werb.g_trending.utils.ColorUtils
 import com.werb.g_trending.utils.Preference
 import com.werb.g_trending.utils.RxEvent
+import com.werb.g_trending.utils.event.LanguageDeleteEvent
 import com.werb.g_trending.utils.event.LanguageEvent
+import com.werb.g_trending.utils.list
 import com.werb.library.MoreAdapter
 import com.werb.library.action.MoreClickListener
 import com.werb.library.link.RegisterItem
@@ -58,7 +61,12 @@ class LanguageActivity : BaseActivity() {
             val alertDialog = AlertDialog.Builder(this@LanguageActivity)
             alertDialog.setMessage(R.string.delete_language)
             alertDialog.setPositiveButton(R.string.delete, {_, _ ->
-                adapter.removeData(position)
+                if (adapter.itemCount > 1) {
+                    adapter.removeData(position)
+                    RxEvent.send(LanguageDeleteEvent(position))
+                }else {
+                    Toast.makeText(this@LanguageActivity, getString(R.string.size_up_one), Toast.LENGTH_SHORT).show()
+                }
             })
             alertDialog.setNegativeButton(R.string.cancel, {dialog,_ ->  dialog.dismiss()})
             alertDialog.show()
@@ -115,7 +123,7 @@ class LanguageActivity : BaseActivity() {
             }
         }
         if (Languages.isNotEmpty()) {
-            Preference.setLanguage(this, Languages)
+            Preference.setLanguage(this, Languages.list())
             RxEvent.send(LanguageEvent())
         }
     }

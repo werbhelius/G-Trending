@@ -7,11 +7,15 @@ import com.werb.g_trending.adapter.TabLayoutAdapter
 import com.werb.g_trending.fragment.TrendingFragment
 import com.werb.g_trending.utils.Preference
 import com.werb.g_trending.utils.RxEvent
+import com.werb.g_trending.utils.event.LanguageDeleteEvent
 import com.werb.g_trending.utils.event.LanguageEvent
+import com.werb.g_trending.utils.list
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
+
+    private lateinit var adapter: TabLayoutAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,18 +33,14 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initTabLayout() {
-        var array = Preference.getLanguage(this)
-        if (array.isEmpty()) {
-            array = resources.getStringArray(R.array.trending)
-            Preference.setLanguage(this, array)
+        var list = Preference.getLanguage(this)
+        if (list.isEmpty()) {
+            list = resources.getStringArray(R.array.trending).list()
+            Preference.setLanguage(this, list)
         }
-        val fragments = arrayListOf<TrendingFragment>().apply {
-            for (i in 1..array.size) {
-                add(TrendingFragment.newInstance(array[i-1]))
-            }
-        }
-        content_viewPager.offscreenPageLimit = array.size
-        content_viewPager.adapter = TabLayoutAdapter(supportFragmentManager,fragments, array)
+        content_viewPager.offscreenPageLimit = list.size
+        adapter = TabLayoutAdapter(supportFragmentManager, list)
+        content_viewPager.adapter = adapter
         tabLayout.setupWithViewPager(content_viewPager)
     }
 
@@ -50,6 +50,12 @@ class MainActivity : BaseActivity() {
                 .subscribe({
                     initTabLayout()
                 })
+
+        RxEvent.toObservable(LanguageDeleteEvent::class.java)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    adapter.removePage(content_viewPager, it.position)
+                }
     }
 
     private val menuClickListener = Toolbar.OnMenuItemClickListener {
