@@ -24,6 +24,8 @@
 
         <activity android:name=".activity.LanguageActivity"/>
 
+        <activity android:name=".activity.ChooseActivity"/>
+
     </application>
 
 </manifest>

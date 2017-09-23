@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import com.werb.g_trending.fragment.TrendingFragment
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
+import com.werb.g_trending.model.Language
 import com.werb.g_trending.utils.Preference
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/6. */
@@ -22,9 +23,17 @@ class TabLayoutAdapter(fm: FragmentManager, private val titles: MutableList<Stri
         return PagerAdapter.POSITION_NONE
     }
 
-    fun removePage(pager: ViewPager, position: Int) {
-        pager.removeViewAt(position)
-        titles.removeAt(position)
+    fun removePage(pager: ViewPager, language: Language) {
+        val indexOf = titles.indexOf(language.name)
+        pager.removeViewAt(indexOf)
+        titles.removeAt(indexOf)
+        notifyDataSetChanged()
+        pager.offscreenPageLimit = titles.size
+        Preference.setLanguage(pager.context, titles)
+    }
+
+    fun addPage(pager: ViewPager, language: Language) {
+        titles.add(language.name)
         notifyDataSetChanged()
         pager.offscreenPageLimit = titles.size
         Preference.setLanguage(pager.context, titles)

@@ -2,16 +2,16 @@ package com.werb.g_trending.activity
 
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import com.werb.eventbus.EventBus
+import com.werb.eventbus.Subscriber
 import com.werb.g_trending.R
 import com.werb.g_trending.adapter.TabLayoutAdapter
-import com.werb.g_trending.fragment.TrendingFragment
 import com.werb.g_trending.utils.Preference
-import com.werb.g_trending.utils.RxEvent
-import com.werb.g_trending.utils.event.LanguageDeleteEvent
 import com.werb.g_trending.utils.event.LanguageEvent
 import com.werb.g_trending.utils.list
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : BaseActivity() {
 
@@ -22,8 +22,11 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         initToolbar()
         initTabLayout()
-        initEvent()
+    }
 
+    override fun onStart() {
+        super.onStart()
+        EventBus.register(this)
     }
 
     private fun initToolbar() {
@@ -44,18 +47,23 @@ class MainActivity : BaseActivity() {
         tabLayout.setupWithViewPager(content_viewPager)
     }
 
-    private fun initEvent() {
-        RxEvent.toObservable(LanguageEvent::class.java)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    initTabLayout()
-                })
+    @Subscriber(tag = "move")
+    private fun languageMove(event: LanguageEvent){
+        initTabLayout()
+    }
 
-        RxEvent.toObservable(LanguageDeleteEvent::class.java)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    adapter.removePage(content_viewPager, it.position)
-                }
+    @Subscriber(tag = "add")
+    private fun languageAdd(event: LanguageEvent){
+        event.language?.let {
+            adapter.addPage(content_viewPager, it)
+        }
+    }
+
+    @Subscriber(tag = "delete")
+    private fun languageDelete(event: LanguageEvent){
+        event.language?.let {
+            adapter.removePage(content_viewPager, it)
+        }
     }
 
     private val menuClickListener = Toolbar.OnMenuItemClickListener {

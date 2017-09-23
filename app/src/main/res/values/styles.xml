@@ -39,6 +39,15 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="Search.Toolbar.Theme.left" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+
+    <style name="Search.Toolbar.Theme.Text" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">#66262626</item>
+    </style>
+
     <style name="TabLayout.Theme" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">?attr/colorPrimaryLight</item>
         <item name="tabBackground">?attr/selectableItemBackground</item>

@@ -1,16 +1,15 @@
 package com.werb.g_trending.adapter
 
 import android.content.Context
-import android.graphics.Color
 import android.support.v4.app.DialogFragment
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.werb.eventbus.EventBus
 import com.werb.g_trending.R
 import com.werb.g_trending.model.ThemeModel
 import com.werb.g_trending.utils.Preference
-import com.werb.g_trending.utils.RxEvent
 import com.werb.g_trending.utils.Theme
 import com.werb.g_trending.utils.event.ThemeEvent
 import kotlinx.android.synthetic.main.item_theme.view.*
@@ -80,7 +79,7 @@ class ThemeAdapter(private val context: Context, private val dialog: DialogFragm
             itemView.postDelayed({
                 dialog.dismiss()
                 Preference.setTheme(context, Theme.valueOf(themeModel.name))
-                RxEvent.send(ThemeEvent())
+                EventBus.post(ThemeEvent())
             }, 250)
         }
     }

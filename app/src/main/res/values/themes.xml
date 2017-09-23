@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <style name="parent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textCursorDrawable">@drawable/cursor_bg</item>
+    </style>
+
     <style name="DefaultTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -8,28 +12,28 @@
         <item name="colorPrimaryLight">@color/colorAccent</item>
     </style>
 
-    <style name="BlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BlueTheme" parent="parent">
         <item name="colorPrimary">@color/blue_primary</item>
         <item name="colorPrimaryDark">@color/blue_primary_dark</item>
         <item name="colorAccent">@color/blue_accent</item>
         <item name="colorPrimaryLight">@color/colorWhite</item>
     </style>
 
-    <style name="IndigoTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="IndigoTheme" parent="parent">
         <item name="colorPrimary">@color/indigo_primary</item>
         <item name="colorPrimaryDark">@color/indigo_primary_dark</item>
         <item name="colorAccent">@color/indigo_accent</item>
         <item name="colorPrimaryLight">@color/colorWhite</item>
     </style>
 
-    <style name="GreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="GreenTheme" parent="parent">
         <item name="colorPrimary">@color/green_primary</item>
         <item name="colorPrimaryDark">@color/green_primary_dark</item>
         <item name="colorAccent">@color/green_accent</item>
         <item name="colorPrimaryLight">@color/colorWhite</item>
     </style>
 
-    <style name="RedTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="RedTheme" parent="parent">
         <item name="colorPrimary">@color/red_primary</item>
         <item name="colorPrimaryDark">@color/red_primary_dark</item>
         <item name="colorAccent">@color/red_accent</item>
@@ -37,14 +41,14 @@
     </style>
 
 
-    <style name="BlueGreyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BlueGreyTheme" parent="parent">
         <item name="colorPrimary">@color/blue_grey_primary</item>
         <item name="colorPrimaryDark">@color/blue_grey_primary_dark</item>
         <item name="colorAccent">@color/blue_grey_accent</item>
         <item name="colorPrimaryLight">@color/colorWhite</item>
     </style>
 
-    <style name="BlackTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BlackTheme" parent="parent">
         <item name="colorPrimary">@color/black_primary</item>
         <item name="colorPrimaryDark">@color/black_primary_dark</item>
         <item name="colorAccent">@color/black_accent</item>
@@ -52,21 +56,21 @@
     </style>
 
 
-    <style name="PurpleTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="PurpleTheme" parent="parent">
         <item name="colorPrimary">@color/purple_primary</item>
         <item name="colorPrimaryDark">@color/purple_primary_dark</item>
         <item name="colorAccent">@color/purple_accent</item>
         <item name="colorPrimaryLight">@color/colorWhite</item>
     </style>
 
-    <style name="OrangeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="OrangeTheme" parent="parent">
         <item name="colorPrimary">@color/orange_primary</item>
         <item name="colorPrimaryDark">@color/orange_primary_dark</item>
         <item name="colorAccent">@color/orange_accent</item>
         <item name="colorPrimaryLight">@color/colorWhite</item>
     </style>
 
-    <style name="PinkTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="PinkTheme" parent="parent">
         <item name="colorPrimary">@color/pink_primary</item>
         <item name="colorPrimaryDark">@color/pink_primary_dark</item>
         <item name="colorAccent">@color/pink_accent</item>

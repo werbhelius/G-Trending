@@ -3,6 +3,7 @@
 
     <color name="colorLight">#979797</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteLight">#fafafa</color>
     <color name="colorBlue">#1e90ff</color>
     <color name="colorGray">#9c9c9c</color>
     <color name="colorGrayDark">#696969</color>

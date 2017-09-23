@@ -3,6 +3,7 @@
     <string name="menu_theme">Theme</string>
     <string name="menu_language">Language</string>
     <string name="menu_about">About</string>
+    <string name="menu_add">Add</string>
 
     <string name="theme_default">Default</string>
     <string name="theme_blue">Blue</string>
@@ -19,4 +20,9 @@
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
     <string name="size_up_one">Size must greater than one</string>
+    <string name="search_info">Input Language...</string>
+    <string name="size_down_ten">Up to 10 can be selected</string>
+
+    <string name="open">open</string>
+    <string name="close">close</string>
 </resources>

@@ -4,9 +4,10 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.werb.eventbus.EventBus
+import com.werb.eventbus.Subscriber
 import com.werb.g_trending.R
 import com.werb.g_trending.utils.Preference
-import com.werb.g_trending.utils.RxEvent
 import com.werb.g_trending.utils.Theme
 import com.werb.g_trending.utils.event.ThemeEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,7 +19,11 @@ open class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         initTheme()
         super.onCreate(savedInstanceState)
-        initEvent()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.register(this)
     }
 
     private fun initTheme() {
@@ -45,16 +50,10 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    private fun initEvent() {
-        RxEvent.toObservable(ThemeEvent::class.java)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    recreate()
-                })
+    @Subscriber
+    private fun theme(event: ThemeEvent) {
+        recreate()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
 }

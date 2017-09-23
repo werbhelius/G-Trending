@@ -27,10 +27,12 @@ class RepositoryViewHolder(containerView: View) : MoreViewHolder<Repository>(con
             colorType.visibility = View.GONE
         } else {
             colorType.visibility = View.VISIBLE
-            data.color.let {
-                val drawable = context.resources.getDrawable(R.drawable.oval_drawable)
-                drawable.setColorFilter(Color.parseColor(it), PorterDuff.Mode.SRC)
-                colorType.setBackgroundDrawable(drawable)
+            data.color?.let {
+                if (it.length == 7) {
+                    val drawable = context.resources.getDrawable(R.drawable.oval_drawable)
+                    drawable.setColorFilter(Color.parseColor(it), PorterDuff.Mode.SRC)
+                    colorType.setBackgroundDrawable(drawable)
+                }
             }
         }
         if (TextUtils.isEmpty(data.todayStars)) {

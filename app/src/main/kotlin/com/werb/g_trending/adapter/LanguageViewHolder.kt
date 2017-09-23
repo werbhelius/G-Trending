@@ -2,7 +2,6 @@ package com.werb.g_trending.adapter
 
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.support.v7.app.AlertDialog
 import android.view.View
 import com.werb.g_trending.R
 import com.werb.g_trending.model.Language
@@ -17,10 +16,11 @@ class LanguageViewHolder(containerView: View) : MoreViewHolder<Language>(contain
 
     override fun bindData(data: Language) {
         name.text = data.name
-        val drawable = containerView.context.resources.getDrawable(R.drawable.oval_drawable)
-        drawable.setColorFilter(Color.parseColor(data.color), PorterDuff.Mode.SRC)
-        colorType.setBackgroundDrawable(drawable)
-
+        data.color?.let {
+            val drawable = containerView.context.resources.getDrawable(R.drawable.oval_drawable)
+            drawable.setColorFilter(Color.parseColor(data.color), PorterDuff.Mode.SRC)
+            colorType.setBackgroundDrawable(drawable)
+        }
         containerView.tag = this
         addOnLongClickListener(containerView)
 

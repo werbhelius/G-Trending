@@ -5,25 +5,28 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.support.design.widget.Snackbar
+import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
+import android.util.TypedValue
 import android.view.View
 import android.widget.Toast
+import com.werb.eventbus.EventBus
+import com.werb.eventbus.Subscriber
 import com.werb.g_trending.R
 import com.werb.g_trending.adapter.LanguageViewHolder
 import com.werb.g_trending.model.Language
 import com.werb.g_trending.utils.ColorUtils
 import com.werb.g_trending.utils.Preference
-import com.werb.g_trending.utils.RxEvent
-import com.werb.g_trending.utils.event.LanguageDeleteEvent
 import com.werb.g_trending.utils.event.LanguageEvent
-import com.werb.g_trending.utils.list
 import com.werb.library.MoreAdapter
 import com.werb.library.action.MoreClickListener
 import com.werb.library.link.RegisterItem
 import kotlinx.android.synthetic.main.activity_language.*
 import java.util.*
+
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/15. */
 
@@ -40,6 +43,15 @@ class LanguageActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { finish() }
+
+        val drawable = resources.getDrawable(R.drawable.ic_add_black_24dp)
+        val typedValue = TypedValue()
+        theme.resolveAttribute(R.attr.colorPrimaryLight, typedValue, true)
+        val wrappedDrawable = DrawableCompat.wrap(drawable)
+        DrawableCompat.setTint(wrappedDrawable, resources.getColor(typedValue.resourceId))
+        add.setBackgroundDrawable(wrappedDrawable)
+        add.setOnClickListener { add() }
+
         itemTouchHelper.attachToRecyclerView(recyclerView)
         adapter.apply {
             register(RegisterItem(R.layout.item_language, LanguageViewHolder::class.java, itemClickListener))
@@ -55,25 +67,56 @@ class LanguageActivity : BaseActivity() {
         }
     }
 
-    private val itemClickListener = object: MoreClickListener(){
+    override fun onStart() {
+        super.onStart()
+        EventBus.register(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.unRegister(this)
+    }
+
+    private fun add() {
+        ChooseActivity.startActivity(this)
+        Snackbar.make(recyclerView, getString(R.string.size_down_ten), Snackbar.LENGTH_SHORT)
+                .setAction("OK", {}).show()
+    }
+
+    @Subscriber(tag = "add")
+    private fun languageAdd(event: LanguageEvent) {
+        event.language?.let {
+            adapter.loadData(it)
+        }
+    }
+
+    @Subscriber(tag = "delete")
+    private fun languageDelete(event: LanguageEvent) {
+        event.language?.let {
+            adapter.removeData(it)
+        }
+    }
+
+    private val itemClickListener = object : MoreClickListener() {
 
         override fun onItemClick(view: View, position: Int) {
+            val language = view.tag as Language
             val alertDialog = AlertDialog.Builder(this@LanguageActivity)
             alertDialog.setMessage(R.string.delete_language)
-            alertDialog.setPositiveButton(R.string.delete, {_, _ ->
+            alertDialog.setPositiveButton(R.string.delete, { _, _ ->
                 if (adapter.itemCount > 1) {
                     adapter.removeData(position)
-                    RxEvent.send(LanguageDeleteEvent(position))
-                }else {
+                    EventBus.post(LanguageEvent(language), "delete")
+                } else {
                     Toast.makeText(this@LanguageActivity, getString(R.string.size_up_one), Toast.LENGTH_SHORT).show()
                 }
             })
-            alertDialog.setNegativeButton(R.string.cancel, {dialog,_ ->  dialog.dismiss()})
+            alertDialog.setNegativeButton(R.string.cancel, { dialog, _ -> dialog.dismiss() })
             alertDialog.show()
         }
 
         override fun onItemLongClick(view: View, position: Int): Boolean {
-            val holder =  view.tag as LanguageViewHolder
+            val holder = view.tag as LanguageViewHolder
             itemTouchHelper.startDrag(holder)
             return true
         }
@@ -116,15 +159,15 @@ class LanguageActivity : BaseActivity() {
     }
 
     private var runnable: Runnable = Runnable {
-        val Languages = arrayOfNulls<String>(10)
+        val languages = arrayListOf<String>()
         adapter.list.forEach {
             if (it is Language) {
-                Languages[adapter.list.indexOf(it)] = it.name
+                languages.add(it.name)
             }
         }
-        if (Languages.isNotEmpty()) {
-            Preference.setLanguage(this, Languages.list())
-            RxEvent.send(LanguageEvent())
+        if (languages.isNotEmpty()) {
+            Preference.setLanguage(this, languages)
+            EventBus.post(LanguageEvent(null), "move")
         }
     }
 
