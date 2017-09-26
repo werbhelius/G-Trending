@@ -26,7 +26,7 @@ object TrendingRequest {
     }
 
     fun developer(lang: String?, daily: DailyType = DailyType.TODAY): Observable<List<Developer>> {
-        val url = buildUrl("$baseUrl/developer", lang, daily)
+        val url = buildUrl("$baseUrl/developers", lang, daily)
         return Observable.create(ObservableOnSubscribe<List<Developer>> {
             val users = requestUsers(url)
             it.onNext(users)

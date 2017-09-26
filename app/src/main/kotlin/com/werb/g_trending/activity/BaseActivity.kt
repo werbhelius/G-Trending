@@ -21,11 +21,6 @@ open class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onStart() {
-        super.onStart()
-        EventBus.register(this)
-    }
-
     private fun initTheme() {
         val theme = Preference.getTheme(this)
         when (theme) {

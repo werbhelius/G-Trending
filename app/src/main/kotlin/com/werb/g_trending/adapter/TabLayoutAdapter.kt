@@ -25,11 +25,14 @@ class TabLayoutAdapter(fm: FragmentManager, private val titles: MutableList<Stri
 
     fun removePage(pager: ViewPager, language: Language) {
         val indexOf = titles.indexOf(language.name)
-        pager.removeViewAt(indexOf)
-        titles.removeAt(indexOf)
-        notifyDataSetChanged()
-        pager.offscreenPageLimit = titles.size
-        Preference.setLanguage(pager.context, titles)
+        val view = pager.getChildAt(indexOf)
+        view?.let {
+            pager.removeViewAt(indexOf)
+            titles.removeAt(indexOf)
+            notifyDataSetChanged()
+            pager.offscreenPageLimit = titles.size
+            Preference.setLanguage(pager.context, titles)
+        }
     }
 
     fun addPage(pager: ViewPager, language: Language) {

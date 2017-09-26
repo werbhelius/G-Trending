@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/repos"
+            android:icon="@drawable/ic_book_black_24dp"
+            android:title="@string/menu_repos" />
+        <item
+            android:id="@+id/developer"
+            android:icon="@drawable/ic_people_black_24dp"
+            android:title="@string/menu_developer" />
+    </group>
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/language"
+            android:icon="@drawable/ic_language_black_24dp"
+            android:title="@string/menu_language" />
+    </group>
+    <group android:id="@+id/group3">
+
+        <item
+            android:id="@+id/theme"
+            android:icon="@drawable/svg_theme"
+            android:title="@string/menu_theme" />
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/svg_info"
+            android:title="@string/menu_about" />
+
+    </group>
+
+</menu>

@@ -4,6 +4,8 @@
     <string name="menu_language">Language</string>
     <string name="menu_about">About</string>
     <string name="menu_add">Add</string>
+    <string name="menu_repos">Repository</string>
+    <string name="menu_developer">Developer</string>
 
     <string name="theme_default">Default</string>
     <string name="theme_blue">Blue</string>

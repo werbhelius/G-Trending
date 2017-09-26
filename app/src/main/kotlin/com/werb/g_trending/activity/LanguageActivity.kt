@@ -79,8 +79,6 @@ class LanguageActivity : BaseActivity() {
 
     private fun add() {
         ChooseActivity.startActivity(this)
-        Snackbar.make(recyclerView, getString(R.string.size_down_ten), Snackbar.LENGTH_SHORT)
-                .setAction("OK", {}).show()
     }
 
     @Subscriber(tag = "add")

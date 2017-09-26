@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.werb.g_trending.Config
 import com.werb.g_trending.R
+import com.werb.g_trending.adapter.DeveloperViewHolder
 import com.werb.g_trending.adapter.RepositoryViewHolder
 import com.werb.g_trending.api.TrendingRequest
 import com.werb.g_trending.utils.ResourcesUtils
@@ -39,17 +41,46 @@ class TrendingFragment : LazyLoadFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.addItemDecoration(ItemDecoration(context))
-        adapter.apply {
-            register(RegisterItem(R.layout.item_trending, RepositoryViewHolder::class.java))
-            attachTo(recyclerView)
+        when (Config.TRENDING_TAG) {
+            "repos" -> {
+                adapter.register(RegisterItem(R.layout.item_trending, RepositoryViewHolder::class.java))
+            }
+            "developer" -> {
+                adapter.register(RegisterItem(R.layout.item_view_developer, DeveloperViewHolder::class.java))
+            }
         }
+        adapter.attachTo(recyclerView)
         refresh?.setOnRefreshListener {
             requestData()
         }
     }
 
     override fun requestData() {
+        when (Config.TRENDING_TAG) {
+            "repos" -> {
+                repos()
+            }
+            "developer" -> {
+                developer()
+            }
+        }
+    }
+
+    private fun repos() {
         TrendingRequest.repository(language)
+                .doOnSubscribe {
+                    refresh?.isRefreshing = true
+                }
+                .subscribe({
+                    adapter.removeAllData()
+                    adapter.loadData(it)
+                }, { it.printStackTrace() }, {
+                    refresh?.isRefreshing = false
+                })
+    }
+
+    private fun developer() {
+        TrendingRequest.developer(language)
                 .doOnSubscribe {
                     refresh?.isRefreshing = true
                 }
@@ -76,7 +107,7 @@ class TrendingFragment : LazyLoadFragment() {
     private inner class ItemDecoration(private val context: Context) : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
             super.getItemOffsets(outRect, view, parent, state)
-            outRect?.top = ResourcesUtils.dp2px(context, 3f)
+            outRect?.bottom = ResourcesUtils.dp2px(context, 3f)
         }
     }
 
