@@ -15,8 +15,7 @@
             android:title="@string/menu_developer" />
     </group>
     <group
-        android:id="@+id/group2"
-        android:checkableBehavior="single">
+        android:id="@+id/group2">
         <item
             android:id="@+id/language"
             android:icon="@drawable/ic_language_black_24dp"

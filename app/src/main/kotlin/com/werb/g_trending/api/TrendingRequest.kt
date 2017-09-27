@@ -2,7 +2,7 @@ package com.werb.g_trending.api
 
 import com.werb.g_trending.model.Repository
 import com.werb.g_trending.model.Developer
-import com.werb.g_trending.model.Repository.User
+import com.werb.g_trending.model.User
 import com.werb.g_trending.utils.RxHelper
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe

@@ -20,7 +20,7 @@ class DeveloperViewHolder(containerView: View) : MoreViewHolder<Developer>(conta
         containerView.setOnClickListener {
             val intent = Intent()
             intent.action = "android.intent.action.VIEW"
-            intent.data = Uri.parse("https://github.com/" + data.url)
+            intent.data = Uri.parse("https://github.com" + data.url)
             itemView.context.startActivity(intent)
         }
     }

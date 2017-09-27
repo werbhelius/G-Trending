@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import com.facebook.drawee.view.SimpleDraweeView
 import com.werb.g_trending.R
 import com.werb.g_trending.model.Repository
+import com.werb.g_trending.model.User
 
 /**
  *
@@ -24,20 +25,21 @@ class AvatarsView : LinearLayout {
         orientation = LinearLayout.HORIZONTAL
     }
 
-    fun setData(data: MutableList<Repository.User>) {
+    fun setData(data: MutableList<User>) {
         removeAllViews()
         for (user in data) {
-            addChildView(user.avatar)
+            user.avatar?.let {
+                addChildView(it)
+            }
         }
     }
 
     private fun addChildView(imageUrl: String) {
         val layout = LayoutInflater.from(context).inflate(R.layout.item_avatar, this, false) as LinearLayout
         val avatar = layout.findViewById<SimpleDraweeView>(R.id.itemAvatar)
-        avatar.setImageURI(imageUrl )
+        avatar.setImageURI(imageUrl)
         addView(layout)
     }
-
 
 
 }

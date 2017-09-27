@@ -76,6 +76,8 @@
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/widget_view_drawer_header"
+            app:itemTextColor="@color/navigation_menu_item_color"
+            app:itemIconTint="@color/navigation_menu_item_color"
             app:menu="@menu/drawer_menu" />
 
     </android.support.design.internal.ScrimInsetsFrameLayout>

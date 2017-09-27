@@ -20,7 +20,7 @@
             android:layout_height="45dp"
             android:layout_centerVertical="true"
             app:roundAsCircle="true"
-            app:roundingBorderColor="@color/colorBack"
+            app:roundingBorderColor="@color/colorLine"
             app:roundingBorderWidth="1px"/>
 
 

@@ -11,8 +11,8 @@ data class Repository(val title: String?,
                       val todayStars: String?,
                       val language: String?,
                       val contributors: String,
-                      var users: MutableList<User>) {
+                      var users: MutableList<User>)
 
-    data class User(val name: String, val avatar: String)
-}
+data class User(val name: String, val avatar: String?, val url: String? = "")
+
 

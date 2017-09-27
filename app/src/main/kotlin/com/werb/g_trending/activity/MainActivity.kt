@@ -16,6 +16,8 @@ import com.werb.g_trending.utils.event.LanguageEvent
 import com.werb.g_trending.utils.list
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import android.content.res.ColorStateList
+import android.content.res.Resources
 
 
 class MainActivity : BaseActivity() {
