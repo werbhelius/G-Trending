@@ -36,7 +36,7 @@
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
-        android:text="See what the GitHub community is most excited about today."
+        android:text="@string/app_info"
         android:textSize="14sp"
         android:textColor="?attr/colorPrimaryLight"/>
 

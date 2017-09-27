@@ -26,6 +26,8 @@
 
         <activity android:name=".activity.ChooseActivity"/>
 
+        <activity android:name=".activity.AboutActivity"/>
+
     </application>
 
 </manifest>

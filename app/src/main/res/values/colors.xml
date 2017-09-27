@@ -42,9 +42,9 @@
     <color name="orange_primary_dark">#D1471C</color>
     <color name="orange_accent">#FF5722</color>
 
-    <color name="black_primary">#212121</color>
-    <color name="black_primary_dark">#141414</color>
-    <color name="black_accent">#212121</color>
+    <color name="black_primary">#1e2327</color>
+    <color name="black_primary_dark">#121517</color>
+    <color name="black_accent">#1e2327</color>
 
     <color name="purple_primary">#8e24aa</color>
     <color name="purple_primary_dark">#721d88</color>

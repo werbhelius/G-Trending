@@ -4,6 +4,7 @@ package com.werb.g_trending.model
 
 data class Developer(val name: String,
                      val avatar: String,
+                     val url: String,
                      val repositoryUrl: String,
                      val repositoryName: String,
                      val repositoryDesc: String)

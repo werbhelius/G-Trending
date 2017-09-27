@@ -1,7 +1,9 @@
 package com.werb.g_trending.adapter
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.net.Uri
 import android.text.TextUtils
 import android.view.View
 import com.werb.g_trending.R
@@ -40,6 +42,13 @@ class RepositoryViewHolder(containerView: View) : MoreViewHolder<Repository>(con
         }
         if (TextUtils.isEmpty(data.description)) {
             description.text = "no description"
+        }
+
+        containerView.setOnClickListener {
+            val intent = Intent()
+            intent.action = "android.intent.action.VIEW"
+            intent.data = Uri.parse("https://github.com/" + data.url)
+            itemView.context.startActivity(intent)
         }
     }
 }

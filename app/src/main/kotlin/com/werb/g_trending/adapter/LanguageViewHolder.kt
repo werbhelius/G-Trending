@@ -1,5 +1,6 @@
 package com.werb.g_trending.adapter
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.view.View

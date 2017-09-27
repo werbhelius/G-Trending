@@ -4,6 +4,7 @@ package com.werb.g_trending.model
 
 data class Repository(val title: String?,
                       val description: String,
+                      val url: String,
                       val stars: String?,
                       val forks: String?,
                       var color: String?,
@@ -13,11 +14,5 @@ data class Repository(val title: String?,
                       var users: MutableList<User>) {
 
     data class User(val name: String, val avatar: String)
-
-    override fun toString(): String {
-        return "Repository(title=$title, description='$description', stars=$stars, forks=$forks, color=$color, todayStars=$todayStars, language=$language, contributors='$contributors', users=$users)"
-    }
-
-
 }
 

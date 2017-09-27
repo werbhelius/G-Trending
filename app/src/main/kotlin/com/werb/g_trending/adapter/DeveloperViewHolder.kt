@@ -1,5 +1,7 @@
 package com.werb.g_trending.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import com.werb.g_trending.model.Developer
 import com.werb.library.MoreViewHolder
@@ -14,5 +16,12 @@ class DeveloperViewHolder(containerView: View) : MoreViewHolder<Developer>(conta
         name.text = data.name
         repos.text = data.repositoryName
         desc.text = data.repositoryDesc
+
+        containerView.setOnClickListener {
+            val intent = Intent()
+            intent.action = "android.intent.action.VIEW"
+            intent.data = Uri.parse("https://github.com/" + data.url)
+            itemView.context.startActivity(intent)
+        }
     }
 }

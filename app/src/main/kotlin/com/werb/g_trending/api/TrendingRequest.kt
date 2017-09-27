@@ -22,7 +22,7 @@ object TrendingRequest {
 
     fun repository(lang: String?, daily: DailyType = DailyType.TODAY): Observable<List<Repository>> {
         return RxHelper.getObservable(JSoupProvider.getTrendingService().getTrending(lang, buildDaily(daily)))
-                .flatMap {RxHelper.getObservable(requestRepos(it)) }
+                .flatMap { RxHelper.getObservable(requestRepos(it)) }
     }
 
     fun developer(lang: String?, daily: DailyType = DailyType.TODAY): Observable<List<Developer>> {
@@ -34,8 +34,8 @@ object TrendingRequest {
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
-    private fun buildUrl(url: String , lang: String?, daily: DailyType): String {
-        return  when (daily) {
+    private fun buildUrl(url: String, lang: String?, daily: DailyType): String {
+        return when (daily) {
             DailyType.TODAY -> "$url/$lang?since=daily"
             DailyType.WEEK -> "$url/$lang?since=weekly"
             DailyType.MONTH -> "$url/$lang?since=monthly"
@@ -43,7 +43,7 @@ object TrendingRequest {
     }
 
     private fun buildDaily(daily: DailyType): String {
-        return  when (daily) {
+        return when (daily) {
             DailyType.TODAY -> "daily"
             DailyType.WEEK -> "weekly"
             DailyType.MONTH -> "monthly"
@@ -52,7 +52,7 @@ object TrendingRequest {
 
 
     private fun requestRepos(url: String): Observable<List<Repository>> {
-        return Observable.fromPublisher { s->
+        return Observable.fromPublisher { s ->
             val trendingList = mutableListOf<Repository>()
             val document: Document = Jsoup.parse(url)
             val repoList = document.select(".repo-list")
@@ -62,6 +62,7 @@ object TrendingRequest {
                     if (list.isNotEmpty()) {
                         it.onEach {
                             val title = it.select(".d-inline-block > h3 > a").text()
+                            val url = it.select(".d-inline-block > h3 > a").attr("href")
                             val description = it.select(".py-1 > p").text()
                             val stars = it.select(".f6 > a[href*=/stargazers]").text()
                             val forks = it.select(".f6 > a[href*=/network]").text()
@@ -86,7 +87,7 @@ object TrendingRequest {
                                     users.add(User(name, avatar))
                                 }
                             }
-                            val repos = Repository(title, description, stars, forks, color, todayStars, language, contributors, users)
+                            val repos = Repository(title, description, url, stars, forks, color, todayStars, language, contributors, users)
                             trendingList.add(repos)
                         }
                     }
@@ -108,10 +109,11 @@ object TrendingRequest {
                     it.onEach {
                         val avatar = it.select(".d-flex div.mx-2 a:eq(0) img.rounded-1").attr("src")
                         val name = it.select(".d-flex div.mx-2 h2 a").text()
+                        val url = it.select(".d-flex div.mx-2 h2 a").attr("href")
                         val repositoryUrl = it.select(".d-flex div.mx-2 a:eq(1)").attr("href")
                         val repositoryName = it.select(".d-flex div.mx-2 a:eq(1) span.repo-snipit-name span.repo").text()
                         val repositoryDesc = it.select(".d-flex div.mx-2 a:eq(1) span.repo-snipit-description ").text()
-                        val user = Developer(name, avatar, repositoryUrl, repositoryName, repositoryDesc)
+                        val user = Developer(name, avatar, url, repositoryUrl, repositoryName, repositoryDesc)
                         userList.add(user)
                     }
                 }

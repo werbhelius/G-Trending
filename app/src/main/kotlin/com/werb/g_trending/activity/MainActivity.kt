@@ -99,13 +99,13 @@ class MainActivity : BaseActivity() {
                 mainDrawerLayout.closeDrawer(GravityCompat.START)
             }
             R.id.language -> {
-                LanguageActivity.startActivity(this@MainActivity)
+                LanguageActivity.startActivity(this)
             }
             R.id.theme -> {
                 ThemeDialog().show(supportFragmentManager, "theme")
             }
-            R.id.info -> {
-
+            R.id.about -> {
+                AboutActivity.startActivity(this)
             }
         }
 
