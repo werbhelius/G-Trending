@@ -2,6 +2,7 @@ package com.werb.g_trending
 
 import android.app.Application
 import android.content.Context
+import android.support.multidex.MultiDexApplication
 import android.util.Log
 import com.crashlytics.android.Crashlytics
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -11,7 +12,7 @@ import io.fabric.sdk.android.Fabric
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/10. */
 
-class MyApp: Application() {
+class MyApp: MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
