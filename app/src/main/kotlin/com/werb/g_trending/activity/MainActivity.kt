@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.widget.Toolbar
 import com.werb.eventbus.EventBus
 import com.werb.eventbus.Subscriber
 import com.werb.g_trending.Config
@@ -14,10 +13,7 @@ import com.werb.g_trending.adapter.TabLayoutAdapter
 import com.werb.g_trending.utils.Preference
 import com.werb.g_trending.utils.event.LanguageEvent
 import com.werb.g_trending.utils.list
-import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import android.content.res.ColorStateList
-import android.content.res.Resources
 
 
 class MainActivity : BaseActivity() {

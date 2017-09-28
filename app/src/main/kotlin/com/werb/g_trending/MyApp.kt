@@ -5,6 +5,10 @@ import android.content.Context
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.github.moduth.blockcanary.BlockCanary
 import com.werb.g_trending.utils.ColorUtils
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
+
+
 
 
 /** Created by wanbo <werbhelius@gmail.com> on 2017/9/10. */
@@ -18,6 +22,7 @@ class MyApp: Application() {
 //        BlockCanary.install(this, AppContext()).start()
         Fresco.initialize(this)
         ColorUtils.load(applicationContext)
+        Fabric.with(this, Crashlytics())
     }
 
     companion object {
