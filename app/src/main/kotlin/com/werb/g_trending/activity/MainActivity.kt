@@ -1,5 +1,7 @@
 package com.werb.g_trending.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -108,5 +110,13 @@ class MainActivity : BaseActivity() {
         }
 
         return@OnNavigationItemSelectedListener true
+    }
+
+    companion object {
+        fun startActivity(activity: Activity) {
+            val intent = Intent(activity, MainActivity::class.java)
+            activity.startActivity(intent)
+            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
     }
 }
