@@ -39,6 +39,7 @@ class AboutActivity : BaseActivity() {
         adapter.loadData("Open source")
         adapter.loadData(User("Werb/MoreType", null, url = "https://github.com/Werb/MoreType"))
         adapter.loadData(User("Werb/EventBusKotlin", null, url = "https://github.com/Werb/EventBusKotlin"))
+        adapter.loadData(User("jhy/jsoup", null, url = "https://github.com/jhy/jsoup"))
         adapter.loadData(User("facebook/fresco", null, url = "https://github.com/facebook/fresco"))
         adapter.loadData(User("ReactiveX/RxJava", null, url = "https://github.com/ReactiveX/RxJava"))
         adapter.loadData(User("ReactiveX/RxAndroid", null, url = "https://github.com/ReactiveX/RxAndroid"))
