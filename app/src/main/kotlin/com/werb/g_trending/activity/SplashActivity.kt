@@ -14,7 +14,10 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.e("SplashActivity", System.currentTimeMillis().toString())
-        Handler().postDelayed({ MainActivity.startActivity(this) }, 300)
+        Handler().postDelayed({
+            MainActivity.startActivity(this)
+            finish()
+        }, 300)
 
     }
 
