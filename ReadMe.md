@@ -1,4 +1,4 @@
-# G_Trending
+# Trending
 
 查看 Github 每日热门趋势
 
