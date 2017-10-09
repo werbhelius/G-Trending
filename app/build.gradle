@@ -8,6 +8,14 @@ repositories {
 }
 
 android {
+    signingConfigs {
+        Trending {
+            keyAlias 'trending'
+            keyPassword 'Wanbo1221010919'
+            storeFile file('/Users/wanbo/Dev/Android/keystore/trending.jks')
+            storePassword 'Wanbo1221010919'
+        }
+    }
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
     defaultConfig {
@@ -23,6 +31,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.Trending
         }
     }
     sourceSets {
@@ -57,7 +66,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.1'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    implementation "com.squareup.retrofit2:converter-gson:2.3.0"
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.werb.moretype:moretype:0.2.0'
     implementation 'com.werb.eventbuskotlin:eventbuskotlin:0.1.7'
     implementation 'com.android.support:multidex:1.0.2'
