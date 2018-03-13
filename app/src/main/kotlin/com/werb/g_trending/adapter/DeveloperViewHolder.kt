@@ -1,8 +1,10 @@
 package com.werb.g_trending.adapter
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import com.werb.g_trending.activity.WebActivity
 import com.werb.g_trending.model.Developer
 import com.werb.library.MoreViewHolder
 import kotlinx.android.synthetic.main.item_view_developer.*
@@ -11,6 +13,8 @@ import kotlinx.android.synthetic.main.item_view_developer.*
 
 class DeveloperViewHolder(containerView: View) : MoreViewHolder<Developer>(containerView) {
 
+    private val context = containerView.context
+
     override fun bindData(data: Developer) {
         icon.setImageURI(data.avatar)
         name.text = data.name
@@ -18,10 +22,7 @@ class DeveloperViewHolder(containerView: View) : MoreViewHolder<Developer>(conta
         desc.text = data.repositoryDesc
 
         containerView.setOnClickListener {
-            val intent = Intent()
-            intent.action = "android.intent.action.VIEW"
-            intent.data = Uri.parse("https://github.com" + data.url)
-            itemView.context.startActivity(intent)
+            WebActivity.startActivity(context as Activity, "https://github.com" + data.url, data.name)
         }
     }
 }

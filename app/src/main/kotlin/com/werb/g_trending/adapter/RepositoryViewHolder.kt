@@ -1,5 +1,6 @@
 package com.werb.g_trending.adapter
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -7,6 +8,7 @@ import android.net.Uri
 import android.text.TextUtils
 import android.view.View
 import com.werb.g_trending.R
+import com.werb.g_trending.activity.WebActivity
 import com.werb.g_trending.model.Repository
 import com.werb.library.MoreViewHolder
 import kotlinx.android.synthetic.main.item_trending.*
@@ -45,10 +47,7 @@ class RepositoryViewHolder(containerView: View) : MoreViewHolder<Repository>(con
         }
 
         containerView.setOnClickListener {
-            val intent = Intent()
-            intent.action = "android.intent.action.VIEW"
-            intent.data = Uri.parse("https://github.com" + data.url)
-            itemView.context.startActivity(intent)
+            WebActivity.startActivity(context as Activity, "https://github.com" + data.url, data.title)
         }
     }
 }

@@ -43,6 +43,8 @@
 
         <activity android:name=".activity.AboutActivity" />
 
+        <activity android:name=".activity.WebActivity"/>
+
     </application>
 
 </manifest>

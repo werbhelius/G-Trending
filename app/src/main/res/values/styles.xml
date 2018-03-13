@@ -23,6 +23,10 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="TextStyle.Black">
         <item name="android:textColor">@color/colorBlack</item>
     </style>

@@ -54,4 +54,8 @@
     <color name="pink_primary_dark">#C2185B</color>
     <color name="pink_accent">#E91E63</color>
 
+    <color name="refresh_progress_1">#536DFE</color>
+    <color name="refresh_progress_2">#f44336</color>
+    <color name="refresh_progress_3">#FF4081</color>
+
 </resources>
